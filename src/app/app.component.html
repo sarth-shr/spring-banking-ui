@@ -1,0 +1,46 @@
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg fixed-top bg-light navbar-light" style="margin-bottom: 1000px;">
+  <div class="container">
+    <a class="navbar-brand">
+      <i class="fa-solid fa-house" style="margin-right: 6px"></i>Spring Banking
+    </a>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ms-auto align-items-center">
+        @if (isLoggedIn) {
+        <li class="nav-item">
+          <a class="nav-link mx-2" routerLink="account">
+            <i class="fa-solid fa-cash-register pe-2"></i>Account
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link mx-2" routerLink="profile">
+            <i class="fa-solid fa-user pe-2"></i>Profile
+          </a>
+        </li>
+        <li class="nav-item ms-3">
+          <a href="/" class="btn btn-black btn-rounded" (click)="logout()">Log Out</a>
+        </li>
+        }
+        @if (!isLoggedIn) {
+        <li class="nav-item ms-3">
+          <a routerLink="register" class="btn btn-black btn-rounded">
+            <i class="fa-solid fa-pen-fancy pe-2"></i>Sign Up
+          </a>
+        </li>
+        <li class="nav-item ms-3">
+          <a routerLink="login" class="btn btn-black btn-rounded">
+            <i class="fa-solid fa-right-to-bracket pe-2"></i>Log In
+          </a>
+        </li>
+        }
+      </ul>
+    </div>
+  </div>
+</nav>
+<!-- Navbar -->
+
+<!-- Router Outlet -->
+<div style="margin-top: 75px;">
+  <router-outlet></router-outlet>
+</div>
+<!-- Router Outlet -->
