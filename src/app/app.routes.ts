@@ -30,8 +30,8 @@ export const routes: Routes = [
   },
   {
     path: '',
-    title: 'Home Page',
-    component: CustomerDashboardComponent,
+    title: 'Home',
+    component: CustomerProfileComponent,
     canActivate: [authGuard],
   },
 ];

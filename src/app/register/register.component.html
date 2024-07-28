@@ -1,47 +1,90 @@
-<h4>Register An Account</h4>
 <div class="container-fluid">
+  <ul class="nav nav-pills nav-justified mb-3" id="ex1" role="tablist">
+    <li class="nav-item" role="presentation">
+      <a
+        class="nav-link"
+        id="tab-register"
+        data-mdb-pill-init
+        routerLink="/login"
+        role="tab"
+        aria-controls="pills-register"
+        aria-selected="true"
+        >Sign In</a
+      >
+    </li>
+    <li class="nav-item" role="presentation">
+      <a
+        class="nav-link active"
+        id="tab-login"
+        data-mdb-pill-init
+        href="/register"
+        role="tab"
+        aria-controls="pills-login"
+        aria-selected="true"
+        >Register</a
+      >
+    </li>
+  </ul>
+
   <form [formGroup]="form" (ngSubmit)="onSubmit()">
-    <div class="form-group">
-      <label for="firstName" class="form-label">First Name</label>
-      <input type="text" class="form-control" id="firstName" formControlName="firstName" [class.is-invalid]="firstName?.invalid && firstName?.dirty">
-      @if (firstName?.hasError('required') && firstName?.dirty) {
-      <small class="text-danger">Required Field</small>
-    }
+    <div class="row mb-4">
+      <div class="col">
+        <div data-mdb-input-init class="form-group">
+          <input type="text" formControlName="firstName" id="firstName" class="form-control" [class.is-invalid]="firstName?.invalid && firstName?.dirty"/>
+          <label class="form-label" for="firstName">First name</label>
+          <br>
+          @if (firstName?.hasError('required') && firstName?.dirty) {
+            <small class="text-danger">Required Field</small>
+          }
+        </div>
+      </div>
+
+      <div class="col">
+        <div data-mdb-input-init class="form-group">
+          <input type="text" formControlName="lastName" id="lastName" class="form-control" [class.is-invalid]="lastName?.invalid && lastName?.dirty"/>
+          <label class="form-label" for="lastName">Last name</label>
+          <br>
+          @if (lastName?.hasError('required') && lastName?.dirty) {
+            <small class="text-danger">Required Field</small>
+          }
+        </div>
+      </div>
     </div>
 
-    <div class="form-group">
-      <label for="lastName" class="form-label">Last Name</label>
-      <input type="text" class="form-control" id="lastName" formControlName="lastName" [class.is-invalid]="lastName?.invalid && lastName?.dirty">
-      @if (lastName?.hasError('required') && lastName?.dirty) {
-        <small class="text-danger">Required Field</small>
-      }
+    <div class="row mb-4">
+      <div class="col">
+        <div data-mdb-input-init class="form-group">
+          <input type="email" formControlName="email" id="email" class="form-control" [class.is-invalid]="email?.invalid && email?.dirty"/>
+          <label class="form-label" for="email">Email address</label>
+          <br>
+          @if (email?.hasError('required') && email?.dirty) {
+            <small class="text-danger">Required Field</small>
+          }
+          @if (email?.hasError('email') && email?.dirty) {
+            <small class="text-danger">Malformed Email Address</small>
+          }
+        </div>
+      </div>
+
+      <div class="col">
+        <div data-mdb-input-init class="form-group">
+          <input type="password" formControlName="password" id="password" class="form-control" [class.is-invalid]="password?.invalid && password?.dirty"/>
+          <label class="form-label" for="password">Password</label>
+          <br>
+          @if (password?.hasError('required') && password?.dirty) {
+            <small class="text-danger">Required Field</small>
+          }
+          @if (password?.hasError('minlength') && password?.dirty) {
+            <small class="text-danger">Minimum of 8 characters</small>
+          }
+        </div>
+      </div>
     </div>
 
-    <div class="form-group">
-      <label for="email" class="form-label">Email address</label>
-      <input type="text" class="form-control" id="email" formControlName="email" [class.is-invalid]="email?.invalid && email?.dirty">
-      @if (email?.hasError('required') && email?.dirty) {
-        <small class="text-danger">Required Field</small>
-      }
-      @if (email?.hasError('email') && email?.dirty) {
-        <small class="text-danger">Malformed Email Address</small>
-      }
-    </div>
-    
-    <div class="form-group">
-      <label for="password" class="form-label">Password</label>
-      <input type="password" class="form-control" id="password" formControlName="password" [class.is-invalid]="password?.invalid && password?.dirty">
-      @if (password?.hasError('required') && password?.dirty) {
-        <small class="text-danger">Required Field</small>
-      }
-      @if (password?.hasError('minlength') && password?.dirty) {
-        <small class="text-danger">Minimum of 8 characters</small>
-      }
-    </div>
-
-    <div class="form-group">
-      <label for="initialDeposit" class="form-label">Initial Deposit</label>
-      <input type="text" class="form-control" id="initialDeposit" formControlName="initialDeposit" [class.is-invalid]="initialDeposit?.invalid && initialDeposit?.dirty">
+    <div data-mdb-input-init class="form-group">
+      <input type="text" formControlName="initialDeposit" id="initialDeposit" class="form-control" [class.is-invalid]="initialDeposit?.invalid && initialDeposit?.dirty"/>
+      <label class="form-label" for="initialDeposit">Initial Deposit</label>
+      <br>
       @if (initialDeposit?.hasError('required') && initialDeposit?.dirty) {
         <small class="text-danger">Required Field</small>
       }
@@ -51,8 +94,9 @@
     </div>
 
     <div class="form-group">
-    <button type="submit" class="btn btn-primary" [disabled]="form.invalid">Submit</button>
+      <button type="submit" class="btn btn-primary" [disabled]="form.invalid">Register</button>
     </div>
-    <p>Have an account? <a routerLink="/login">Log In</a> </p>
+
+    <p style="margin-top: 20px">Have an account? <a routerLink="/login" style="text-decoration: none;">Sign In</a> </p>
   </form>
 </div>
