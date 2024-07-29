@@ -10,6 +10,7 @@ import { OkResponse } from '../api/response/ok-response';
 import { AuthenticationService } from '../service/authentication.service';
 import { CustomerService } from '../service/customer.service';
 import { Router } from '@angular/router';
+import { ErrorResponse } from '../api/response/error-response';
 
 @Component({
   selector: 'app-customer-update-personal',
@@ -50,8 +51,8 @@ export class CustomerUpdatePersonalComponent implements OnInit {
         alert(res.message);
         this.router.navigate(['../'])
       },
-      error: (err) => {
-        console.log(err.error);
+      error: (err: ErrorResponse) => {
+        alert(err.error);
       },
     });
   }
@@ -61,8 +62,8 @@ export class CustomerUpdatePersonalComponent implements OnInit {
       next: (res: CustomerResponse) =>{
         this.customer = res;
       },
-      error: (err)=>{
-        console.log(err.error);
+      error: (err: ErrorResponse)=>{
+        alert(err.error);
       }
     })
   }
