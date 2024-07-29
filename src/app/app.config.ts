@@ -8,6 +8,7 @@ import {
 } from '@angular/common/http';
 import { routes } from './app.routes';
 import { JwtInterceptorService } from './utils/jwt-interceptor.service';
+import { ErrorInterceptorService } from './utils/error-interceptor.service';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -19,5 +20,10 @@ export const appConfig: ApplicationConfig = {
       useClass: JwtInterceptorService,
       multi: true,
     },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ErrorInterceptorService,
+      multi: true,
+    }
   ],
 };

@@ -3,6 +3,7 @@ import { RouterLink } from '@angular/router';
 import { CustomerResponse } from '../api/response/customer-response';
 import { AuthenticationService } from '../service/authentication.service';
 import { CustomerService } from '../service/customer.service';
+import { ErrorResponse } from '../api/response/error-response';
 
 @Component({
   selector: 'app-customer-profile',
@@ -25,10 +26,10 @@ export class CustomerProfileComponent implements OnInit {
 
   private getCustomer() {
     this.customerService.get(this.authService.extractSubject()).subscribe({
-      next: (res) => {
+      next: (res: CustomerResponse) => {
         this.customer = res;
       },
-      error: (err) => {
+      error: (err: ErrorResponse) => {
         console.log(err.error);
       },
     });
