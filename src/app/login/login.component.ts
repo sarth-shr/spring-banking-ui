@@ -20,6 +20,7 @@ import { AuthenticationService } from '../service/authentication.service';
   styleUrl: './login.component.css',
 })
 export class LoginComponent {
+  isSumbitted = false;
   form = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', [Validators.required]),
@@ -49,6 +50,7 @@ export class LoginComponent {
 
   onSubmit() {
     this.login();
+    this.isSumbitted = true;
   }
 
   public get email() {

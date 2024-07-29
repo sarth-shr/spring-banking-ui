@@ -4,8 +4,6 @@ import { CustomerProfileComponent } from './customer-profile/customer-profile.co
 import { authGuard } from './guards/auth.guard';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
-import { AppComponent } from './app.component';
-import { CustomerDashboardComponent } from './customer-dashboard/customer-dashboard.component';
 
 export const routes: Routes = [
   {
@@ -22,16 +20,17 @@ export const routes: Routes = [
     path: 'profile',
     title: 'Profile Management',
     component: CustomerProfileComponent,
+    canActivate: [authGuard],
   },
   {
     path: 'account',
     title: 'Account Management',
     component: CustomerAccountComponent,
+    canActivate: [authGuard],
   },
   {
     path: '',
-    title: 'Home',
-    component: CustomerProfileComponent,
-    canActivate: [authGuard],
+    redirectTo: 'profile',
+    pathMatch: 'full',
   },
 ];
