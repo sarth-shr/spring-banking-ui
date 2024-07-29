@@ -5,7 +5,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { Router, RouterLink } from '@angular/router';
+import { RouterLink } from '@angular/router';
 import { CustomerResponse } from '../api/response/customer-response';
 import { ErrorResponse } from '../api/response/error-response';
 import { OkResponse } from '../api/response/ok-response';
@@ -28,7 +28,6 @@ export class CustomerUpdateEmailComponent implements OnInit {
   constructor(
     private customerService: CustomerService,
     private authService: AuthenticationService,
-    private router: Router
   ) {}
 
   ngOnInit(): void {

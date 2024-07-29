@@ -3,16 +3,16 @@ import { AbstractControl } from '@angular/forms';
 export function PasswordValidator(
   control: AbstractControl
 ): { [key: string]: boolean } | null {
-  const newPassword = control.get('newPassword');
-  const confirmNewPassword = control.get('confirmNewPassword');
+  const password = control.get('password');
+  const confirmPassword = control.get('confirmPassword');
 
-  if (confirmNewPassword?.hasError('required') || confirmNewPassword?.pristine) {
+  if (confirmPassword?.hasError('required') || confirmPassword?.pristine) {
     return null;
   }
 
-  return newPassword &&
-    confirmNewPassword &&
-    newPassword.value !== confirmNewPassword.value
+  return password &&
+    confirmPassword &&
+    password.value !== confirmPassword.value
     ? { misMatch: true }
     : null;
 }

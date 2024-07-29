@@ -8,7 +8,9 @@ import {
 import { RouterLink } from '@angular/router';
 import { CustomerService } from '../service/customer.service';
 import { PasswordValidator } from '../validators/password-validator';
-import { JsonPipe } from '@angular/common';
+import { AuthenticationService } from '../service/authentication.service';
+import { OkResponse } from '../api/response/ok-response';
+import { ErrorResponse } from '../api/response/error-response';
 
 @Component({
   selector: 'app-customer-update-password',
@@ -18,28 +20,54 @@ import { JsonPipe } from '@angular/common';
   styleUrl: './customer-update-password.component.css',
 })
 export class CustomerUpdatePasswordComponent {
-  form = new FormGroup({
-    currentPassword: new FormControl('', [Validators.required]),
-    newPassword: new FormControl('', [
-      Validators.required,
-      Validators.minLength(8),
-    ]),
-    confirmNewPassword: new FormControl('', [Validators.required]),
-  }, {validators: PasswordValidator});
+  form = new FormGroup(
+    {
+      currentPassword: new FormControl('', [Validators.required]),
+      password: new FormControl('', [
+        Validators.required,
+        Validators.minLength(8),
+      ]),
+      confirmPassword: new FormControl('', [Validators.required]),
+    },
+    { validators: PasswordValidator }
+  );
 
-  constructor(private customerService: CustomerService) {}
+  constructor(
+    private customerService: CustomerService,
+    private authService: AuthenticationService
+  ) {}
 
-  onSubmit() {}
+  onSubmit() {
+    this.update();
+  }
+
+  private update() {
+    this.customerService
+      .updatePassword(
+        this.currentPassword?.value,
+        this.password?.value,
+        this.authService.extractSubject()
+      )
+      .subscribe({
+        next: (res: OkResponse) => {
+          alert(res.message);
+          this.authService.logout();
+        },
+        error: (err: ErrorResponse) => {
+          console.log(err);
+        },
+      });
+  }
 
   public get currentPassword() {
     return this.form.get('currentPassword');
   }
 
-  public get newPassword() {
-    return this.form.get('newPassword');
+  public get password() {
+    return this.form.get('password');
   }
 
-  public get confirmNewPassword() {
-    return this.form.get('confirmNewPassword');
+  public get confirmPassword() {
+    return this.form.get('confirmPassword');
   }
 }
