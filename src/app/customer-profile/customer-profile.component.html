@@ -5,23 +5,11 @@
       <div class="col col-lg-6 mb-4 mb-lg-0">
         <div class="card mb-3" style="border-radius: 0.5rem">
           <div class="row g-0">
-            <div
-              class="col-md-4 gradient-custom text-center text-white"
-              style="
-                border-top-left-radius: 0.5rem;
-                border-bottom-left-radius: 0.5rem;
-              "
-            >
-              <img
-                src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp"
-                alt="Avatar"
-                class="img-fluid my-5"
-                style="width: 80px"
-              />
+            <div class="col-md-4 gradient-custom text-center text-white" style="border-top-left-radius: 0.5rem; border-bottom-left-radius: 0.5rem;">
+              <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp" alt="Avatar" class="img-fluid my-5" style="width: 80px"/>
               <h5>
                 {{ customer.data.firstName }} {{ customer.data.lastName }}
               </h5>
-              <i class="far fa-edit mb-5"></i>
             </div>
             <div class="col-md-8">
               <div class="card-body p-4">
@@ -36,17 +24,23 @@
                     <h6>Last Name</h6>
                     <p class="text-muted">{{ customer.data.lastName }}</p>
                   </div>
+                  <div class="col-12">
+                    <a routerLink="update">
+                      <i class="far fa-edit mb-5"></i> Update Personal Details
+                    </a>
+                  </div>
                 </div>
                 <h6>Account Information</h6>
                 <hr class="mt-0 mb-4" />
                 <div class="row pt-1">
-                  <div class="col-6 mb-3">
+                  <div class="col-12 mb-3">
                     <h6>Email Address</h6>
                     <p class="text-muted">{{ customer.data.email }}</p>
                   </div>
-                  <div class="col-6 mb-3">
-                    <h6>Initial Deposit</h6>
-                    <p class="text-muted">{{ customer.data.initialDeposit }}</p>
+                  <div class="col-12 mb-3">
+                    <a routerLink="update">
+                      <i class="far fa-edit mb-5"></i> Update Security Details
+                    </a>
                   </div>
                 </div>
               </div>

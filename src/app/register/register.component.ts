@@ -10,6 +10,7 @@ import { Router, RouterLink } from '@angular/router';
 import { ErrorResponse } from '../api/response/error-response';
 import { OkResponse } from '../api/response/ok-response';
 import { AuthenticationService } from '../service/authentication.service';
+import { delay } from 'rxjs';
 
 @Component({
   selector: 'app-register',
@@ -19,6 +20,7 @@ import { AuthenticationService } from '../service/authentication.service';
   styleUrl: './register.component.css',
 })
 export class RegisterComponent {
+  isSubmitted = false;
   form = new FormGroup({
     firstName: new FormControl('', [Validators.required]),
     lastName: new FormControl('', [Validators.required]),
@@ -41,7 +43,7 @@ export class RegisterComponent {
   private register() {
     this.authService.register(this.form.value).subscribe({
       next: (res: OkResponse) => {
-        alert('Registration successful, will be redirected to login shortly');
+        alert(res.message);
         this.router.navigate(['/login']);
       },
       error: (err: ErrorResponse) => {

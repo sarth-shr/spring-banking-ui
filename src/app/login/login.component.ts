@@ -32,10 +32,7 @@ export class LoginComponent {
   ) {}
 
   private login() {
-    let email = this.form.value.email as string;
-    let password = this.form.value.password as string;
-
-    this.authService.login(email, password).subscribe({
+    this.authService.login(this.form.value).subscribe({
       next: (res: HttpResponse<OkResponse>) => {
         alert('Logged in successfully, will be redirected shortly');
         this.router.navigate(['/']).then(() => {
@@ -44,6 +41,7 @@ export class LoginComponent {
       },
       error: (err: ErrorResponse) => {
         alert(err.error);
+        window.location.reload();
       },
     });
   }

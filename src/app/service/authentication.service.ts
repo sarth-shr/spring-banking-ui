@@ -24,13 +24,11 @@ export class AuthenticationService {
       .pipe(catchError(this.handleError));
   }
 
-  login(email: string, password: string): Observable<HttpResponse<OkResponse>> {
+  login(customer: any): Observable<HttpResponse<OkResponse>> {
     return this.http
-      .post<OkResponse>(
-        `${this.baseUrl}/jwt`,
-        { email, password },
-        { observe: 'response' }
-      )
+      .post<OkResponse>(`${this.baseUrl}/jwt`, customer, {
+        observe: 'response',
+      })
       .pipe(
         map((res) => {
           this.token = res.headers.get('Authorization') as string;
