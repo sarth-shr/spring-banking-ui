@@ -23,9 +23,9 @@ export class TransactionsHistoryComponent implements OnInit{
   private getTransactions() {
     let accId = sessionStorage.getItem('accId') as string;
     this.transactionService.getByAccId(parseInt(accId)).subscribe({
-      next: (res: TransactionListResponse) => {
+      next: (res) => {
         this.transactions = res;
-        console.log(res.data.content);
+        console.log(res);
       },
       error: (err: ErrorResponse) => {
         console.log(err);

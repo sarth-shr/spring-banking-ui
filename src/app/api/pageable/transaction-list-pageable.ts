@@ -4,12 +4,13 @@ export interface TransactionListPageable {
       id: number;
       date: Date;
       type: string;
-      fromAccId: number;
-      fromAccOldBalnce: number;
+      amount: number;
+      fromAccountId: number;
+      fromAccOldBalance: number;
       fromAccNewBalance: number;
-      toAccId: number;
+      toAccountId: number;
       toAccOldBalance: number;
-      toAccNewBalace: number;
+      toAccNewBalance: number;
     }
   ];
   pageable: {
