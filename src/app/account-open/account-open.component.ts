@@ -49,7 +49,7 @@ export class AccountOpenComponent {
       .subscribe({
         next: (res: OkResponse) => {
           console.log(res);
-          this.router.navigate(['/account']);
+          this.router.navigate(['/accounts']);
         },
         error: (err: ErrorResponse) => {
           console.log(err.error);

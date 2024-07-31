@@ -1,4 +1,3 @@
-import { JsonPipe } from '@angular/common';
 import { Component } from '@angular/core';
 import {
   FormControl,
@@ -6,7 +5,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { Router, RouterLink } from '@angular/router';
+import { Router, RouteReuseStrategy, RouterLink } from '@angular/router';
 import { ErrorResponse } from '../api/response/error-response';
 import { OkResponse } from '../api/response/ok-response';
 import { AuthenticationService } from '../service/authentication.service';
@@ -58,10 +57,11 @@ export class RegisterComponent {
     this.authService.register(this.form.value).subscribe({
       next: (res: OkResponse) => {
         alert(res.message);
+        this.router.navigate(['/login']);
       },
       error: (err: ErrorResponse) => {
         alert(err.error);
-        this.router.navigate(['/register']);
+        window.location.reload();
       },
     });
   }

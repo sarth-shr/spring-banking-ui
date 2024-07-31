@@ -1,1 +1,53 @@
-<p>transactions-history works!</p>
+<!-- Jumbotron -->
+<div class="p-5 text-center bg-body-tertiary">
+    <h1 class="mb-3">Transaction History</h1>
+    <h4 class="mb-3">View All Past Transactions</h4>
+  </div>
+  <!-- Jumbotron -->
+  
+  <!-- Accounts Table -->
+  <section class="intro">
+          <div class="row justify-content-center">
+            <div class="col-12">
+              <div class="card shadow-2-strong" style="background-color: #f5f7fa">
+                <div class="card-body">
+                  <div class="table-responsive">
+                    <table class="table table-borderless mb-0" style="text-align: center;">
+                      <thead>
+                        <tr>
+                          <th scope="col">TRANSACTION #</th>
+                          <th scope="col">DATE</th>
+                          <th scope="col">TYPE</th>
+                          <th scope="col">FROM A/C #</th>
+                          <th scope="col">FROM A/C OLD AMOUNT</th>
+                          <th scope="col">FROM A/C NEW AMOUNT</th>
+                          <th scope="col">TO A/C #</th>
+                          <th scope="col">TO A/C OLD AMOUNT</th>
+                          <th scope="col">TO A/C NEW AMOUNT</th>
+                        </tr>
+                      </thead>
+                      @if (transactions) {
+                      <tbody>
+                        @for (transaction of transactions.data.content; track transaction.id) {
+                        <tr>
+                          <td>{{transaction.id}}</td>
+                          <td>{{transaction.date | date:'short'}}</td>
+                          <td>{{transaction.type}}</td>
+                          <td>{{transaction.fromAccId}}</td>
+                          <td>{{transaction.fromAccOldBalnce}}</td>
+                          <td>{{transaction.fromAccNewBalance}}</td>
+                          <td>{{transaction.toAccId}}</td>
+                          <td>{{transaction.toAccNewBalace}}</td>
+                          <td>{{transaction.toAccNewBalace}}</td>
+                        </tr>
+                      }
+                      </tbody>
+                    }
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+  </section>
+  <!-- Accounts Table -->

@@ -29,7 +29,15 @@ export class AccountDetailsComponent implements OnInit {
     });
   }
 
-  goToDeposit(){
-    this.router.navigate(["/transactions/deposit"])
+  goToDeposit() {
+    this.router.navigate(['/transactions/deposit']);
+  }
+
+  goToTransfer() {
+    this.router.navigate(['/transactions/transfer']);
+  }
+
+  goToTransactions(){
+    this.router.navigate(['/transactions'])
   }
 }

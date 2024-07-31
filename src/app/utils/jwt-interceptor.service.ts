@@ -5,7 +5,6 @@ import {
   HttpRequest,
 } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { AuthenticationService } from '../service/authentication.service';
 
@@ -15,7 +14,6 @@ import { AuthenticationService } from '../service/authentication.service';
 export class JwtInterceptorService implements HttpInterceptor {
   constructor(
     private authService: AuthenticationService,
-    private router: Router
   ) {}
 
   intercept(
@@ -29,9 +27,7 @@ export class JwtInterceptorService implements HttpInterceptor {
           Authorization: `Bearer ${token}`,
         },
       });
-    } else {
-      this.router.navigate(['/login']);
-    }
+    } 
     return next.handle(req);
   }
 }

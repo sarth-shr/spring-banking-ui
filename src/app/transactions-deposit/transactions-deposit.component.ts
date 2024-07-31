@@ -6,6 +6,9 @@ import {
   Validators,
 } from '@angular/forms';
 import { TransactionService } from '../service/transaction.service';
+import { OkResponse } from '../api/response/ok-response';
+import { ErrorResponse } from '../api/response/error-response';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-transactions-deposit',
@@ -15,6 +18,7 @@ import { TransactionService } from '../service/transaction.service';
   styleUrl: './transactions-deposit.component.css',
 })
 export class TransactionsDepositComponent {
+  isSubmitted = false;
   form = new FormGroup({
     amount: new FormControl('', [
       Validators.required,
@@ -23,16 +27,26 @@ export class TransactionsDepositComponent {
     ]),
   });
 
-  constructor(private transactionService: TransactionService) {}
+  constructor(
+    private transactionService: TransactionService,
+    private router: Router
+  ) {}
 
   onSubmit() {
     this.depositFunds();
+    this.isSubmitted = true;
   }
 
   private depositFunds() {
     let id = sessionStorage.getItem('accId') as string;
     let amount = this.form.get('amount')?.value as string;
-    this.transactionService.deposit(parseInt(id), parseInt(amount));
+    
+    this.transactionService.deposit(parseInt(id), parseInt(amount)).subscribe({
+      next: (res: OkResponse) => {
+        alert(res.message);
+        this.router.navigate(['/accounts']);
+      },
+    });
   }
 
   public get amount() {

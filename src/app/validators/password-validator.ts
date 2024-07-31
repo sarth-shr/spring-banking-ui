@@ -10,9 +10,5 @@ export function PasswordValidator(
     return null;
   }
 
-  return password &&
-    confirmPassword &&
-    password.value !== confirmPassword.value
-    ? { misMatch: true }
-    : null;
+  return password && confirmPassword && password.value !== confirmPassword.value ? { misMatch: true } : null;
 }
