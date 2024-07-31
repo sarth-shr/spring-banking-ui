@@ -19,9 +19,12 @@
           @if (firstName?.hasError('required') && firstName?.dirty) {
             <small class="text-danger">Required Field</small>
           }
+          @if (firstName?.hasError('pattern') && firstName?.dirty) {
+            <small class="text-danger">Please enter a valid name</small>
+          }
         </div>
       </div>
-
+      
       <div class="col">
         <div data-mdb-input-init class="form-group">
           <input type="text" formControlName="lastName" id="lastName" class="form-control" [class.is-invalid]="lastName?.invalid && lastName?.dirty"/>
@@ -29,6 +32,9 @@
           <br>
           @if (lastName?.hasError('required') && lastName?.dirty) {
             <small class="text-danger">Required Field</small>
+          }
+          @if (lastName?.hasError('pattern') && lastName?.dirty) {
+            <small class="text-danger">Please enter a valid name</small>
           }
         </div>
       </div>
@@ -43,7 +49,7 @@
           @if (email?.hasError('required') && email?.dirty) {
             <small class="text-danger">Required Field</small>
           }
-          @if (email?.hasError('email') && email?.dirty) {
+          @if (email?.hasError('pattern') && email?.dirty) {
             <small class="text-danger">Malformed Email Address</small>
           }
         </div>
@@ -71,8 +77,11 @@
       @if (initialDeposit?.hasError('required') && initialDeposit?.dirty) {
         <small class="text-danger">Required Field</small>
       }
-      @if (initialDeposit?.hasError('min') && initialDeposit?.dirty) {
+      @if (initialDeposit?.hasError('min') && initialDeposit?.dirty && !initialDeposit?.hasError('pattern')) {
         <small class="text-danger">Minimum amount is 1000</small>
+      }
+      @if (initialDeposit?.hasError('pattern') && initialDeposit?.dirty) {
+        <small class="text-danger">Please enter a valid amount</small>
       }
     </div>
 

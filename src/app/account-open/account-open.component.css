@@ -1,0 +1,16 @@
+.form-group{
+  margin-top: 20px;
+}
+
+.container-fluid{
+  margin-top: 7.5%;  
+  width: 50%;
+  border: 1px solid grey;
+  box-shadow: 3px 3px 3px 3px;
+  border-radius: 33px;
+  padding: 50px;
+}
+
+.form-check-input{
+  margin-right: 12px;
+}

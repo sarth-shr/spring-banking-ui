@@ -20,6 +20,7 @@ import { ErrorResponse } from '../api/response/error-response';
   styleUrl: './customer-update-password.component.css',
 })
 export class CustomerUpdatePasswordComponent {
+  isSubmitted = false;
   form = new FormGroup(
     {
       currentPassword: new FormControl('', [Validators.required]),
@@ -54,7 +55,7 @@ export class CustomerUpdatePasswordComponent {
           this.authService.logout();
         },
         error: (err: ErrorResponse) => {
-          console.log(err);
+          alert(err.error+"\nTry again");
         },
       });
   }

@@ -1,0 +1,140 @@
+@if (account) {
+<div class="container-fluid">
+  <section>
+    <div class="row">
+      <div class="col-12 mt-3 mb-1">
+        <h5 class="text-uppercase">Account Details</h5>
+        <p>Account ID #{{ account.data.id }}</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xl-6 col-md-12 mb-4">
+        <div class="card">
+          <div class="card-body">
+            <div class="d-flex justify-content-between p-md-1">
+              <div class="d-flex flex-row">
+                <div class="align-self-center">
+                  <i class="fa-solid fa-pen fa-3x me-4"></i>
+                </div>
+                <div>
+                  <h4>Account Type</h4>
+                  <p class="mb-0">* Checking Accounts do not accrue interest</p>
+                </div>
+              </div>
+              <div class="align-self-center">
+                <h2 class="h3 mb-0">{{ account.data.type | uppercase }} A/C</h2>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-xl-6 col-md-12 mb-4">
+        <div class="card">
+          <div class="card-body">
+            <div class="d-flex justify-content-between p-md-1">
+              <div class="d-flex flex-row">
+                <div class="align-self-center">
+                  <i class="fa-solid fa-money-bill-trend-up fa-3x me-4"></i>
+                </div>
+                <div>
+                  <h4>Interest Rate</h4>
+                  <p class="mb-0">* Terms and conditions apply</p>
+                </div>
+              </div>
+              <div class="align-self-center">
+                <h2 class="h3 mb-0">{{ account.data.interest }} %</h2>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xl-6 col-md-12 mb-4">
+        <div class="card">
+          <div class="card-body">
+            <div class="d-flex justify-content-between p-md-1">
+              <div class="d-flex flex-row">
+                <div class="align-self-center">
+                  <i class="fa-solid fa-money-bill fa-3x me-4"></i>
+                </div>
+                <div>
+                  <h4>Balance</h4>
+                  <p class="mb-0">NPR (Rs.)</p>
+                </div>
+              </div>
+              <div class="align-self-center">
+                <h2 class="h3 mb-0">{{ account.data.balance }}</h2>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-xl-6 col-md-12 mb-4">
+        <div class="card">
+          <div class="card-body">
+            <div class="d-flex justify-content-between p-md-1">
+              <div class="d-flex flex-row">
+                <div class="align-self-center">
+                  <i class="fa-solid fa-file-invoice fa-3x me-4"></i>
+                </div>
+                <div>
+                  <h4>Transaction History</h4>
+                  <p class="mb-0">View all past transactions</p>
+                </div>
+              </div>
+              <div class="align-self-center">
+                <button type="button" class="btn btn-primary">
+                  Transactions
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xl-6 col-md-12 mb-4">
+        <div class="card">
+          <div class="card-body">
+            <div class="d-flex justify-content-between p-md-1">
+              <div class="d-flex flex-row">
+                <div class="align-self-center">
+                  <i class="fa-solid fa-building-columns fa-3x me-4"></i>
+                </div>
+                <div>
+                  <h4>Deposit</h4>
+                  <p class="mb-0">Deposit funds into your account</p>
+                </div>
+              </div>
+              <div class="align-self-center">
+                <button type="button" class="btn btn-primary" (click)="goToDeposit()">Deposit</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-xl-6 col-md-12 mb-4">
+        <div class="card">
+          <div class="card-body">
+            <div class="d-flex justify-content-between p-md-1">
+              <div class="d-flex flex-row">
+                <div class="align-self-center">
+                  <i class="fa-solid fa-money-bill-transfer fa-3x me-4"></i>
+                </div>
+                <div>
+                  <h4>Transfer</h4>
+                  <p class="mb-0">Transfer funds between accounts</p>
+                </div>
+              </div>
+              <div class="align-self-center">
+                <button type="button" class="btn btn-primary">Transfer</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+}

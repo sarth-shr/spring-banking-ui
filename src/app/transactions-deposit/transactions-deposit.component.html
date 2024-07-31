@@ -1,0 +1,37 @@
+<div class="container-fluid">
+  <ul class="nav nav-pills nav-justified mb-3" id="ex1" role="tablist">
+    <li class="nav-item" role="presentation">
+      <a class="nav-link active" id="tab-login" data-mdb-pill-init href="/login" role="tab" aria-controls="pills-login" aria-selected="true" >
+        Sign In
+      </a>
+    </li>
+    <li class="nav-item" role="presentation">
+      <a class="nav-link" id="tab-register" data-mdb-pill-init routerLink="/register" role="tab" aria-controls="pills-register" aria-selected="false" style="border: 1px solid blue">
+        Deposit Funds
+      </a>
+    </li>
+  </ul>
+
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="amount" class="form-label">Deposit Amount</label>
+      <input type="text" class="form-control" id="email" formControlName="amount" [class.is-invalid]="amount?.invalid && amount?.dirty"/>
+      <br>
+      @if (amount?.hasError('required') && amount?.dirty) {
+        <small class="text-danger">Required Field</small>
+      }
+      @if (amount?.hasError('min') && amount?.dirty && !amount?.hasError('pattern')) {
+        <small class="text-danger">Minimum amount is 1000</small>
+      }
+      @if (amount?.hasError('pattern') && amount?.dirty) {
+        <small class="text-danger">Please enter a valid amount</small>
+      }
+    </div>
+
+    <div class="form-group">
+      <button type="submit" class="btn btn-primary" [disabled]="form.invalid">
+        Sign In
+      </button>
+    </div>
+  </form>
+</div>

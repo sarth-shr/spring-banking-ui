@@ -1,0 +1,45 @@
+<div class="container-fluid">
+  <ul class="nav nav-pills nav-justified mb-3" id="ex1" role="tablist">
+    <li class="nav-item" role="presentation">
+      <a class="nav-link active" id="tab-login" data-mdb-pill-init role="tab" aria-controls="pills-login" aria-selected="true">Open An Account</a>
+    </li>
+  </ul>
+
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="balance" class="form-label">Account Type</label>
+      <br>
+      <input class="form-check-input" type="radio" formControlName="type" value="saving">
+      <label class="form-check-label" for="flexRadioDefault1">
+        Saving
+      </label>      
+
+      <br>
+      <input class="form-check-input" type="radio" formControlName="type" value="checking">
+      <label class="form-check-label" for="flexRadioDefault1">
+        Checking
+      </label>      
+    </div>
+    @if (type?.hasError('required')) {
+      <small class="text-danger">Required Field</small>
+    }
+
+    <div class="form-group">
+      <label for="balance" class="form-label">Opening Deposit</label>
+      <input type="text" class="form-control" id="balance" formControlName="balance" [class.is-invalid]="balance?.invalid && balance?.dirty">
+      @if (balance?.hasError('required') && balance?.dirty) {
+        <small class="text-danger">Required Field</small>
+      }
+      @if (balance?.hasError('min') && balance?.dirty && !balance?.hasError('pattern')) {
+        <small class="text-danger">Minimum amount is 5000</small>
+      }
+      @if (balance?.hasError('pattern') && balance?.dirty) {
+        <small class="text-danger">Please enter a valid amount</small>
+      }
+    </div>
+
+    <div class="form-group">
+    <button type="submit" class="btn btn-primary" [disabled]="form.invalid">Open Account</button>
+    </div>
+  </form>
+</div>

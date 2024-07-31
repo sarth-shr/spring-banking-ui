@@ -31,6 +31,12 @@ export class LoginComponent {
     private router: Router
   ) {}
 
+  
+  onSubmit() {
+    this.login();
+    this.isSumbitted = true;
+  }
+  
   private login() {
     this.authService.login(this.form.value).subscribe({
       next: (res: HttpResponse<OkResponse>) => {
@@ -45,12 +51,7 @@ export class LoginComponent {
       },
     });
   }
-
-  onSubmit() {
-    this.login();
-    this.isSumbitted = true;
-  }
-
+  
   public get email() {
     return this.form.get('email');
   }

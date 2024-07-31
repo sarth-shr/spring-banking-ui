@@ -20,9 +20,10 @@ import { CustomerService } from '../service/customer.service';
   styleUrl: './customer-update-email.component.css',
 })
 export class CustomerUpdateEmailComponent implements OnInit {
+  isSumitted = false;
   customer!: CustomerResponse;
   form = new FormGroup({
-    updatedEmail: new FormControl('', [Validators.required, Validators.email]),
+    updatedEmail: new FormControl('', [Validators.required, Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]),
   });
 
   constructor(
@@ -36,6 +37,7 @@ export class CustomerUpdateEmailComponent implements OnInit {
 
   onSubmit() {
     this.update();
+    this.isSumitted = true;
   }
 
   private getCustomer() {

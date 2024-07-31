@@ -1,0 +1,64 @@
+<!-- Jumbotron -->
+<div class="p-5 text-center bg-body-tertiary">
+  <h1 class="mb-3">User Accounts</h1>
+  <h4 class="mb-3">Manage and Open Accounts</h4>
+  <a data-mdb-ripple-init class="btn btn-primary" routerLink="open" role="button">
+    Open Account
+  </a>
+</div>
+<!-- Jumbotron -->
+
+<!-- Accounts Table -->
+<section class="intro">
+  <div class="bg-image h-100" style="background-color: #6095f0">
+    <div class="mask d-flex align-items-center h-100">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-12">
+            <div class="card shadow-2-strong" style="background-color: #f5f7fa">
+              <div class="card-body">
+                <div class="table-responsive">
+                  <table class="table table-borderless mb-0" style="text-align: center;">
+                    <thead>
+                      <tr>
+                        <th scope="col">ACCOUNT ID</th>
+                        <th scope="col">ACCOUNT TYPE</th>
+                        <th scope="col">BALANCE</th>
+                        <th scope="col">INTEREST RATE</th>
+                        <th scope="col">DETAILS</th>
+                        <!-- <th scope="col">CLOSE ACCOUNT</th> -->
+                      </tr>
+                    </thead>
+                    @if (accounts) {
+                    <tbody>
+                      @for (account of accounts.data.content; track account.id) {
+                      <tr>
+                        <td>{{account.id}}</td>
+                        <td>{{account.type | uppercase}} A/C</td>
+                        <td>{{account.balance}}</td>
+                        <td>{{account.interest}}</td>
+                        <td>
+                          <button class="btn btn-info btn-sm px-3" (click)="goToDetails(account.id)">
+                            <i class="fa-solid fa-circle-info"></i>
+                          </button>
+                      </td>
+                        <!-- <td>
+                          <button type="button" class="btn btn-danger btn-sm px-3">
+                            <i class="fas fa-times"></i>
+                          </button>
+                        </td> -->
+                      </tr>
+                    }
+                    </tbody>
+                  }
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- Accounts Table -->

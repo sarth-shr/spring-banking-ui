@@ -5,12 +5,12 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+import { Router } from '@angular/router';
 import { CustomerResponse } from '../api/response/customer-response';
+import { ErrorResponse } from '../api/response/error-response';
 import { OkResponse } from '../api/response/ok-response';
 import { AuthenticationService } from '../service/authentication.service';
 import { CustomerService } from '../service/customer.service';
-import { Router } from '@angular/router';
-import { ErrorResponse } from '../api/response/error-response';
 
 @Component({
   selector: 'app-customer-update-personal',
@@ -20,10 +20,17 @@ import { ErrorResponse } from '../api/response/error-response';
   styleUrl: './customer-update-personal.component.css',
 })
 export class CustomerUpdatePersonalComponent implements OnInit {
+  isSubmitted = false;
   customer!: CustomerResponse;
   form = new FormGroup({
-    firstName: new FormControl('', [Validators.required]),
-    lastName: new FormControl('', [Validators.required]),
+    firstName: new FormControl('', [
+      Validators.required,
+      Validators.pattern('[a-zA-Z]*'),
+    ]),
+    lastName: new FormControl('', [
+      Validators.required,
+      Validators.pattern('[a-zA-Z]*'),
+    ]),
   });
 
   constructor(
@@ -36,12 +43,9 @@ export class CustomerUpdatePersonalComponent implements OnInit {
     this.getCustomer();
   }
 
-  public get firstName() {
-    return this.form.get('firstName');
-  }
-
-  public get lastName() {
-    return this.form.get('lastName');
+  onSubmit() {
+    this.updatePersonalInfo();
+    this.isSubmitted = true;
   }
 
   private updatePersonalInfo() {
@@ -49,7 +53,7 @@ export class CustomerUpdatePersonalComponent implements OnInit {
     this.customerService.updatePersonal(this.form.value, subject).subscribe({
       next: (res: OkResponse) => {
         alert(res.message);
-        this.router.navigate(['../'])
+        this.router.navigate(['../']);
       },
       error: (err: ErrorResponse) => {
         alert(err.error);
@@ -57,18 +61,22 @@ export class CustomerUpdatePersonalComponent implements OnInit {
     });
   }
 
-  private getCustomer(){
+  private getCustomer() {
     this.customerService.get(this.authService.extractSubject()).subscribe({
-      next: (res: CustomerResponse) =>{
+      next: (res: CustomerResponse) => {
         this.customer = res;
       },
-      error: (err: ErrorResponse)=>{
+      error: (err: ErrorResponse) => {
         alert(err.error);
-      }
-    })
+      },
+    });
   }
 
-  onSubmit() {
-    this.updatePersonalInfo();
+  public get firstName() {
+    return this.form.get('firstName');
+  }
+
+  public get lastName() {
+    return this.form.get('lastName');
   }
 }
