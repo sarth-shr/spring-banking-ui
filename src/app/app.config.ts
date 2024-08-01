@@ -6,10 +6,10 @@ import {
   provideHttpClient,
   withInterceptorsFromDi,
 } from '@angular/common/http';
-import { routes } from './app.routes';
-import { JwtInterceptorService } from './utils/jwt-interceptor.service';
-import { ErrorInterceptorService } from './utils/error-interceptor.service';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { routes } from './app.routes';
+import { AuthInterceptorService } from './utils/auth-interceptor.service';
+import { ErrorInterceptorService } from './utils/error-interceptor.service';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -18,13 +18,14 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient(withInterceptorsFromDi()),
     {
       provide: HTTP_INTERCEPTORS,
-      useClass: JwtInterceptorService,
+      useClass: ErrorInterceptorService,
       multi: true,
     },
     {
       provide: HTTP_INTERCEPTORS,
-      useClass: ErrorInterceptorService,
+      useClass: AuthInterceptorService,
       multi: true,
-    }, provideAnimationsAsync()
+    },
+    provideAnimationsAsync(),
   ],
 };

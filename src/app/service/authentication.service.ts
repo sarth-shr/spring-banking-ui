@@ -18,9 +18,9 @@ export class AuthenticationService {
     return this.http.post<OkResponse>(`${this.baseUrl}/customers`, customer);
   }
 
-  login(customer: any): Observable<HttpResponse<OkResponse>> {
+  login(user: any): Observable<HttpResponse<OkResponse>> {
     return this.http
-      .post<OkResponse>(`${this.baseUrl}/jwt`, customer, {
+      .post<OkResponse>(`${this.baseUrl}/jwt`, user, {
         observe: 'response',
       })
       .pipe(
@@ -32,20 +32,38 @@ export class AuthenticationService {
       );
   }
 
-  logout(): void {
+  logout() {
+    localStorage.removeItem('accId');
     localStorage.removeItem('user-token');
-    this.router.navigate(['/']);
   }
 
   isLoggedIn(): boolean {
     return localStorage.getItem('user-token') ? true : false;
   }
 
-  extractSubject(): string {
+  decodePayload() {
     const token = localStorage.getItem('user-token') as string;
     let payload = token.split('.')[1];
     let decodedPayload = window.atob(payload);
     let payloadObject = JSON.parse(decodedPayload);
-    return payloadObject.sub;
+    return payloadObject;
+  }
+
+  extractSubject(): string {
+    let payload = this.decodePayload();
+    return payload.sub;
+  }
+
+  extractAuthorities(): string {
+    let payload = this.decodePayload();
+    return payload.authorities;
+  }
+
+  isAdmin(): boolean {
+    return this.extractAuthorities().includes('ADMIN') ? true : false;
+  }
+
+  forbiddenAccess() {
+    return this.router.navigate(['forbidden']);
   }
 }

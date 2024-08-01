@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { CustomerResponse } from '../api/response/customer-response';
+import { ErrorResponse } from '../api/response/error-response';
 import { AuthenticationService } from '../service/authentication.service';
 import { CustomerService } from '../service/customer.service';
-import { ErrorResponse } from '../api/response/error-response';
 
 @Component({
   selector: 'app-customer-profile',

@@ -14,13 +14,13 @@
   <form [formGroup]="form" (ngSubmit)="onSubmit()">
     <div class="form-group">
       <label for="updatedEmail" class="form-label">New Email address</label>
-      <input type="text" class="form-control" id="updatedEmail" formControlName="updatedEmail" [class.is-invalid]="updatedEmail?.invalid && updatedEmail?.dirty" [placeholder]="customer.data.email">
       @if (updatedEmail?.hasError('required') && updatedEmail?.dirty) {
         <small class="text-danger">Required Field</small>
       }
       @if (updatedEmail?.hasError('pattern') && updatedEmail?.dirty) {
         <small class="text-danger">Malformed Email Address</small>
       }
+      <input type="text" class="form-control" id="updatedEmail" formControlName="updatedEmail" [class.is-invalid]="updatedEmail?.invalid && updatedEmail?.dirty" [placeholder]="customer.data.email">
     </div>
 
     <div class="form-group">

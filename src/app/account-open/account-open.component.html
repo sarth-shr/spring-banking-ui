@@ -26,7 +26,6 @@
 
     <div class="form-group">
       <label for="balance" class="form-label">Opening Deposit</label>
-      <input type="text" class="form-control" id="balance" formControlName="balance" [class.is-invalid]="balance?.invalid && balance?.dirty">
       @if (balance?.hasError('required') && balance?.dirty) {
         <small class="text-danger">Required Field</small>
       }
@@ -36,6 +35,7 @@
       @if (balance?.hasError('pattern') && balance?.dirty) {
         <small class="text-danger">Please enter a valid amount</small>
       }
+      <input type="text" class="form-control" id="balance" formControlName="balance" [class.is-invalid]="balance?.invalid && balance?.dirty">
     </div>
 
     <div class="form-group">

@@ -9,6 +9,7 @@ import { Router, RouteReuseStrategy, RouterLink } from '@angular/router';
 import { ErrorResponse } from '../api/response/error-response';
 import { OkResponse } from '../api/response/ok-response';
 import { AuthenticationService } from '../service/authentication.service';
+import { SpamValidator } from '../validators/spam-validator';
 
 @Component({
   selector: 'app-register',
@@ -23,14 +24,17 @@ export class RegisterComponent {
     firstName: new FormControl('', [
       Validators.required,
       Validators.pattern('[a-zA-Z]*'),
+      SpamValidator
     ]),
     lastName: new FormControl('', [
       Validators.required,
       Validators.pattern('[a-zA-Z]*'),
+      SpamValidator
     ]),
     email: new FormControl('', [
       Validators.required,
       Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$'),
+      SpamValidator
     ]),
     password: new FormControl('', [
       Validators.required,

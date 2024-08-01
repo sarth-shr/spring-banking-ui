@@ -7,14 +7,13 @@ import {
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { AuthenticationService } from '../service/authentication.service';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
 })
-export class JwtInterceptorService implements HttpInterceptor {
-  constructor(
-    private authService: AuthenticationService,
-  ) {}
+export class AuthInterceptorService implements HttpInterceptor {
+  constructor(private authService: AuthenticationService, private router: Router) {}
 
   intercept(
     req: HttpRequest<any>,
@@ -27,7 +26,10 @@ export class JwtInterceptorService implements HttpInterceptor {
           Authorization: `Bearer ${token}`,
         },
       });
-    } 
+      if(this.authService.isAdmin()){
+        this.router.navigate(['/admin'])
+      }
+    }
     return next.handle(req);
   }
 }

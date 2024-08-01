@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RouterLink, RouterOutlet } from '@angular/router';
 import { AuthenticationService } from './service/authentication.service';
 
@@ -9,11 +9,17 @@ import { AuthenticationService } from './service/authentication.service';
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 })
-export class AppComponent {
-  isLoggedIn = localStorage.getItem('user-token');
-
+export class AppComponent implements OnInit {
+  isLoggedIn! : boolean;
+  isAdmin!: boolean;
+  
   constructor(private authService: AuthenticationService) {}
 
+  ngOnInit(): void {
+    this.isLoggedIn = this.authService.isLoggedIn();
+    this.isAdmin = this.authService.isAdmin();
+  }
+  
   logout(): void {
     this.authService.logout();
   }

@@ -69,4 +69,6 @@
 </section>
 <!-- Transactions Table -->
 
-<mat-paginator [length]="totalItems" [pageSize]="pageSize" [pageIndex]="currentPage" (page)="pageChanged($event)"></mat-paginator>
+@if (transactions.data.pageable.totalElements) {
+  <mat-paginator [length]="totalItems" [pageSize]="pageSize" [pageIndex]="currentPage" (page)="pageChanged($event)"></mat-paginator>
+}

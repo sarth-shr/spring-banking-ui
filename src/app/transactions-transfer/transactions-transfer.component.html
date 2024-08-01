@@ -2,7 +2,7 @@
     <div class="container-fluid">
       <ul class="nav nav-pills nav-justified mb-3" id="ex1" role="tablist">
         <li class="nav-item" role="presentation">
-          <a class="nav-link active" id="tab-login" data-mdb-pill-init href="/login" role="tab" aria-controls="pills-login" aria-selected="true" >
+          <a class="nav-link active" id="tab-login" data-mdb-pill-init role="tab" aria-controls="pills-login" aria-selected="true" >
             Transfer Funds
           </a>
         </li>
@@ -11,13 +11,17 @@
       <form [formGroup]="form" (ngSubmit)="onSubmit()">
         <div class="form-group">
           <label for="toId" class="form-label">Receiver Account ID</label>
+          @if (toId?.hasError('required') && toId?.dirty) {
+            <small class="text-danger">Required Field</small>
+          }
+          @if (toId?.hasError('pattern') && toId?.dirty) {
+            <small class="text-danger">Please enter a valid A/C #</small>
+          }
           <input type="text" class="form-control" formControlName="toId" [class.is-invalid]="toId?.invalid && toId?.dirty"/>
         </div>
 
         <div class="form-group">
           <label for="amount" class="form-label">Deposit Amount</label>
-          <input type="text" class="form-control" formControlName="amount" [class.is-invalid]="amount?.invalid && amount?.dirty"/>
-          <br>
           @if (amount?.hasError('required') && amount?.dirty) {
             <small class="text-danger">Required Field</small>
           }
@@ -27,6 +31,7 @@
           @if (amount?.hasError('pattern') && amount?.dirty) {
             <small class="text-danger">Please enter a valid amount</small>
           }
+          <input type="text" class="form-control" formControlName="amount" [class.is-invalid]="amount?.invalid && amount?.dirty"/>
         </div>
     
         <div class="form-group">

@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
-import { JwtInterceptorService } from './jwt-interceptor.service';
+import { JwtInterceptorService } from './auth-interceptor';
 
 describe('JwtInterceptorService', () => {
   let service: JwtInterceptorService;

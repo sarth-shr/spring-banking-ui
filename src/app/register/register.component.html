@@ -13,29 +13,33 @@
     <div class="row mb-4">
       <div class="col">
         <div data-mdb-input-init class="form-group">
-          <input type="text" formControlName="firstName" id="firstName" class="form-control" [class.is-invalid]="firstName?.invalid && firstName?.dirty"/>
           <label class="form-label" for="firstName">First name</label>
-          <br>
           @if (firstName?.hasError('required') && firstName?.dirty) {
             <small class="text-danger">Required Field</small>
           }
-          @if (firstName?.hasError('pattern') && firstName?.dirty) {
+          @if (firstName?.hasError('pattern') && firstName?.dirty && !firstName?.hasError('spam')) {
             <small class="text-danger">Please enter a valid name</small>
           }
+          @if (firstName?.hasError('spam') && firstName?.dirty) {
+            <small class="text-danger">Spam Detection</small>
+          }
+          <input type="text" formControlName="firstName" id="firstName" class="form-control" [class.is-invalid]="firstName?.invalid && firstName?.dirty"/>
         </div>
       </div>
       
       <div class="col">
         <div data-mdb-input-init class="form-group">
-          <input type="text" formControlName="lastName" id="lastName" class="form-control" [class.is-invalid]="lastName?.invalid && lastName?.dirty"/>
           <label class="form-label" for="lastName">Last name</label>
-          <br>
           @if (lastName?.hasError('required') && lastName?.dirty) {
             <small class="text-danger">Required Field</small>
           }
-          @if (lastName?.hasError('pattern') && lastName?.dirty) {
+          @if (lastName?.hasError('pattern') && lastName?.dirty && !lastName?.hasError('spam')) {
             <small class="text-danger">Please enter a valid name</small>
           }
+          @if (lastName?.hasError('spam') && lastName?.dirty) {
+            <small class="text-danger">Spam Detection</small>
+          }
+          <input type="text" formControlName="lastName" id="lastName" class="form-control" [class.is-invalid]="lastName?.invalid && lastName?.dirty"/>
         </div>
       </div>
     </div>
@@ -43,37 +47,36 @@
     <div class="row mb-4">
       <div class="col">
         <div data-mdb-input-init class="form-group">
-          <input type="email" formControlName="email" id="email" class="form-control" [class.is-invalid]="email?.invalid && email?.dirty"/>
           <label class="form-label" for="email">Email address</label>
-          <br>
           @if (email?.hasError('required') && email?.dirty) {
             <small class="text-danger">Required Field</small>
           }
-          @if (email?.hasError('pattern') && email?.dirty) {
+          @if (email?.hasError('pattern') && email?.dirty && !email?.hasError('spam')) {
             <small class="text-danger">Malformed Email Address</small>
           }
+          @if (email?.hasError('spam') && email?.dirty) {
+            <small class="text-danger">Spam Detection</small>
+          }
+          <input type="email" formControlName="email" id="email" class="form-control" [class.is-invalid]="email?.invalid && email?.dirty"/>
         </div>
       </div>
 
       <div class="col">
         <div data-mdb-input-init class="form-group">
-          <input type="password" formControlName="password" id="password" class="form-control" [class.is-invalid]="password?.invalid && password?.dirty"/>
           <label class="form-label" for="password">Password</label>
-          <br>
           @if (password?.hasError('required') && password?.dirty) {
             <small class="text-danger">Required Field</small>
           }
           @if (password?.hasError('minlength') && password?.dirty) {
             <small class="text-danger">Minimum of 8 characters</small>
           }
+          <input type="password" formControlName="password" id="password" class="form-control" [class.is-invalid]="password?.invalid && password?.dirty"/>
         </div>
       </div>
     </div>
 
     <div data-mdb-input-init class="form-group">
-      <input type="text" formControlName="initialDeposit" id="initialDeposit" class="form-control" [class.is-invalid]="initialDeposit?.invalid && initialDeposit?.dirty"/>
       <label class="form-label" for="initialDeposit">Initial Deposit</label>
-      <br>
       @if (initialDeposit?.hasError('required') && initialDeposit?.dirty) {
         <small class="text-danger">Required Field</small>
       }
@@ -83,6 +86,7 @@
       @if (initialDeposit?.hasError('pattern') && initialDeposit?.dirty) {
         <small class="text-danger">Please enter a valid amount</small>
       }
+      <input type="text" formControlName="initialDeposit" id="initialDeposit" class="form-control" [class.is-invalid]="initialDeposit?.invalid && initialDeposit?.dirty"/>
     </div>
 
     <div class="form-group">

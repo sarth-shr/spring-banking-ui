@@ -75,4 +75,6 @@
 <!-- Accounts Table -->
 }
 
-<mat-paginator [length]="totalItems" [pageSize]="pageSize" [pageIndex]="currentPage" (page)="pageChanged($event)"></mat-paginator>
+@if (accounts.data.pageable.totalElements > 0 ) {
+  <mat-paginator [length]="totalItems" [pageSize]="pageSize" [pageIndex]="currentPage" (page)="pageChanged($event)"></mat-paginator>
+}
