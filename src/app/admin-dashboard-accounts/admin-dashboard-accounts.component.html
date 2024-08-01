@@ -1,10 +1,7 @@
 <!-- Jumbotron -->
 <div class="p-5 text-center bg-body-tertiary">
   <h1 class="mb-3">User Accounts</h1>
-  <h4 class="mb-3">Manage and Open Accounts</h4>
-  <a data-mdb-ripple-init class="btn btn-primary" routerLink="open" role="button">
-    Open Account
-  </a>
+  <h4 class="mb-3">Manage and View Accounts</h4>
 </div>
 <!-- Jumbotron -->
  
@@ -28,7 +25,7 @@
                         <th scope="col">BALANCE</th>
                         <th scope="col">INTEREST RATE</th>
                         <th scope="col">DETAILS</th>
-                        <!-- <th scope="col">CLOSE ACCOUNT</th> -->
+                        <th scope="col">CLOSE ACCOUNT</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -40,15 +37,15 @@
                         <td>{{ account.balance }}</td>
                         <td>{{ account.interest }}</td>
                         <td>
-                          <button class="btn btn-info btn-sm px-3" (click)="goToDetails(account.id)">
+                          <button class="btn btn-info btn-sm px-3" (click)="goToDetails()">
                             <i class="fa-solid fa-circle-info"></i>
                           </button>
                         </td>
-                        <!-- <td>
+                        <td>
                           <button type="button" class="btn btn-danger btn-sm px-3">
                             <i class="fas fa-times"></i>
                           </button>
-                        </td> -->
+                        </td>
                       </tr>
                       }
                     </tbody>

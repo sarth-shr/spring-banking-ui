@@ -21,8 +21,10 @@ export class CustomerService {
     });
   }
 
-  getAll(): Observable<CustomerListResponse> {
-    return this.http.get<CustomerListResponse>(`${this.baseUrl}`);
+  getAll(page: number): Observable<CustomerListResponse> {
+    let params = new HttpParams();
+    params = params.append("page", page)
+    return this.http.get<CustomerListResponse>(`${this.baseUrl}`, {params});
   }
 
   updatePersonal(customer: any, email: string): Observable<OkResponse> {

@@ -3,8 +3,9 @@ import { AccessDeniedComponent } from './access-denied/access-denied.component';
 import { AccountDetailsComponent } from './account-details/account-details.component';
 import { AccountOpenComponent } from './account-open/account-open.component';
 import { AccountComponent } from './account/account.component';
-import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
-import { CustomerProfileComponent } from './customer-profile/customer-profile.component';
+import { AdminDashboardAccountsComponent } from './admin-dashboard-accounts/admin-dashboard-accounts.component';
+import { AdminDashboardCustomersComponent } from './admin-dashboard-customers/admin-dashboard-customers.component';
+import { AdminDashboardTransactionsComponent } from './admin-dashboard-transactions/admin-dashboard-transactions.component';
 import { CustomerUpdateEmailComponent } from './customer-update-email/customer-update-email.component';
 import { CustomerUpdatePasswordComponent } from './customer-update-password/customer-update-password.component';
 import { CustomerUpdatePersonalComponent } from './customer-update-personal/customer-update-personal.component';
@@ -16,6 +17,7 @@ import { RegisterComponent } from './register/register.component';
 import { TransactionsDepositComponent } from './transactions-deposit/transactions-deposit.component';
 import { TransactionsHistoryComponent } from './transactions-history/transactions-history.component';
 import { TransactionsTransferComponent } from './transactions-transfer/transactions-transfer.component';
+import { UserDashboardComponent } from './user-dashboard/user-dashboard.component';
 
 export const routes: Routes = [
   {
@@ -30,8 +32,8 @@ export const routes: Routes = [
   },
   {
     path: 'profile',
-    title: 'Profile Management',
-    component: CustomerProfileComponent,
+    title: 'User Dashboard',
+    component: UserDashboardComponent,
     canActivate: [authGuard],
   },
   {
@@ -89,9 +91,21 @@ export const routes: Routes = [
     canActivate: [authGuard],
   },
   {
-    path: 'admin',
-    title: 'Admin Panel',
-    component: AdminDashboardComponent,
+    path: 'admin/customers',
+    title: 'Manage Customers',
+    component: AdminDashboardCustomersComponent,
+    canActivate: [authGuard, adminGuard],
+  },
+  {
+    path: 'admin/accounts',
+    title: 'Manage Accounts',
+    component: AdminDashboardAccountsComponent,
+    canActivate: [authGuard, adminGuard],
+  },
+  {
+    path: 'admin/transactions',
+    title: 'Manage Transactions',
+    component: AdminDashboardTransactionsComponent,
     canActivate: [authGuard, adminGuard],
   },
   {

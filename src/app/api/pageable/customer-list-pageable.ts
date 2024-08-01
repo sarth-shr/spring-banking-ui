@@ -4,7 +4,7 @@ export interface CustomerListPageable {
       firstName: string;
       lastName: string;
       email: string;
-      initialDeposti: number;
+      initialDeposit: number;
     }
   ];
   pageable: {

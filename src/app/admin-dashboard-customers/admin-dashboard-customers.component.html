@@ -1,14 +1,11 @@
 <!-- Jumbotron -->
 <div class="p-5 text-center bg-body-tertiary">
-  <h1 class="mb-3">User Accounts</h1>
-  <h4 class="mb-3">Manage and Open Accounts</h4>
-  <a data-mdb-ripple-init class="btn btn-primary" routerLink="open" role="button">
-    Open Account
-  </a>
+  <h1 class="mb-3">Registered Customers</h1>
+  <h4 class="mb-3">Manage and View Customers</h4>
 </div>
 <!-- Jumbotron -->
  
-@if (accounts) {
+@if (customers) {
 <!-- Accounts Table -->
 <section class="intro">
   <div class="bg-image h-100" style="background-color: #6095f0">
@@ -18,29 +15,28 @@
           <div class="col-12">
             <div class="card shadow-2-strong" style="background-color: #f5f7fa">
               <div class="card-body">
-                @if (accounts.data.pageable.totalElements>0) {
+                @if (customers.data.pageable.totalElements>0) {
                 <div class="table-responsive">
                   <table class="table table-borderless mb-0" style="text-align: center">
                     <thead>
                       <tr>
-                        <th scope="col">ACCOUNT ID</th>
-                        <th scope="col">ACCOUNT TYPE</th>
-                        <th scope="col">BALANCE</th>
-                        <th scope="col">INTEREST RATE</th>
+                        <th scope="col">FIRST NAME</th>
+                        <th scope="col">LAST NAME</th>
+                        <th scope="col">EMAIL</th>
+                        <th scope="col">INITIAL DEPOSIT</th>
                         <th scope="col">DETAILS</th>
-                        <!-- <th scope="col">CLOSE ACCOUNT</th> -->
                       </tr>
                     </thead>
                     <tbody>
-                      @for (account of accounts.data.content; track account.id)
+                      @for (customer of customers.data.content; track customer.email)
                       {
                       <tr>
-                        <td>{{ account.id }}</td>
-                        <td>{{ account.type | uppercase }} A/C</td>
-                        <td>{{ account.balance }}</td>
-                        <td>{{ account.interest }}</td>
+                        <td>{{ customer.firstName }}</td>
+                        <td>{{ customer.lastName}}</td>
+                        <td>{{ customer.email }}</td>
+                        <td>{{ customer.initialDeposit }}</td>
                         <td>
-                          <button class="btn btn-info btn-sm px-3" (click)="goToDetails(account.id)">
+                          <button class="btn btn-info btn-sm px-3" (click)="goToDetails()">
                             <i class="fa-solid fa-circle-info"></i>
                           </button>
                         </td>
@@ -70,6 +66,6 @@
 <!-- Accounts Table -->
 }
 
-@if (accounts.data.pageable.totalElements > 0 ) {
+@if (customers.data.pageable.totalElements > 0 ) {
   <mat-paginator [length]="totalItems" [pageSize]="pageSize" [pageIndex]="currentPage" (page)="pageChanged($event)"></mat-paginator>
 }

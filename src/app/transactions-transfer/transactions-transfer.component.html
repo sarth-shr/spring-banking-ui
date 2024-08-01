@@ -21,7 +21,7 @@
         </div>
 
         <div class="form-group">
-          <label for="amount" class="form-label">Deposit Amount</label>
+          <label for="amount" class="form-label">Transfer Amount</label>
           @if (amount?.hasError('required') && amount?.dirty) {
             <small class="text-danger">Required Field</small>
           }
@@ -36,7 +36,7 @@
     
         <div class="form-group">
           <button type="submit" class="btn btn-primary" [disabled]="form.invalid">
-            Deposit Amount
+            Transfer Funds
           </button>
         </div>
       </form>

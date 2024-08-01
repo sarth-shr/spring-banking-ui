@@ -13,8 +13,10 @@ export class AccountService {
 
   constructor(private http: HttpClient) {}
 
-  getAll(): Observable<AccountListResponse> {
-    return this.http.get<AccountListResponse>(`${this.baseUrl}`);
+  getAll(page: number): Observable<AccountListResponse> {
+    let params = new HttpParams();
+    params = params.append('page', page);
+    return this.http.get<AccountListResponse>(`${this.baseUrl}`, {params});
   }
 
   getAllByEmail(email: string, page: number): Observable<AccountListResponse> {
