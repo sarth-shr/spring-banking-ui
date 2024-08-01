@@ -51,7 +51,7 @@ export class CustomerUpdatePasswordComponent {
       )
       .subscribe({
         next: (res: OkResponse) => {
-          alert(res.message);
+          alert(res.message+"\nPlease log in again");
           this.authService.logout();
         },
         error: (err: ErrorResponse) => {

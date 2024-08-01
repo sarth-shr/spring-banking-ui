@@ -38,7 +38,7 @@ export class TransactionsDepositComponent {
   }
 
   private depositFunds() {
-    let id = sessionStorage.getItem('accId') as string;
+    let id = localStorage.getItem('accId') as string;
     let amount = this.form.get('amount')?.value as string;
     
     this.transactionService.deposit(parseInt(id), parseInt(amount)).subscribe({

@@ -18,7 +18,7 @@ export class AccountDetailsComponent implements OnInit {
   constructor(private accountService: AccountService, private router: Router) {}
 
   ngOnInit(): void {
-    let id = sessionStorage.getItem('accId') as string;
+    let id = localStorage.getItem('accId') as string;
     this.accountService.get(parseInt(id)).subscribe({
       next: (res: AccountResponse) => {
         this.account = res;

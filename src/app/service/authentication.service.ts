@@ -26,23 +26,23 @@ export class AuthenticationService {
       .pipe(
         map((res) => {
           this.token = res.headers.get('Authorization') as string;
-          sessionStorage.setItem('user-token', this.token);
+          localStorage.setItem('user-token', this.token);
           return res;
         })
       );
   }
 
   logout(): void {
-    sessionStorage.removeItem('user-token');
+    localStorage.removeItem('user-token');
     this.router.navigate(['/']);
   }
 
   isLoggedIn(): boolean {
-    return sessionStorage.getItem('user-token') ? true : false;
+    return localStorage.getItem('user-token') ? true : false;
   }
 
   extractSubject(): string {
-    const token = sessionStorage.getItem('user-token') as string;
+    const token = localStorage.getItem('user-token') as string;
     let payload = token.split('.')[1];
     let decodedPayload = window.atob(payload);
     let payloadObject = JSON.parse(decodedPayload);

@@ -41,9 +41,10 @@ export class TransactionService {
     );
   }
 
-  getByAccId(accId: number): Observable<TransactionListResponse> {
+  getByAccId(accId: number, page: number): Observable<TransactionListResponse> {
     let params = new HttpParams();
     params = params.append('accId', accId);
+    params = params.append('page', page);
 
     return this.http.get<TransactionListResponse>(
       `${this.baseUrl}/transactions/get`, {params}

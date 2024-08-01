@@ -10,7 +10,7 @@ import { AuthenticationService } from './service/authentication.service';
   styleUrl: './app.component.css',
 })
 export class AppComponent {
-  isLoggedIn = sessionStorage.getItem('user-token');
+  isLoggedIn = localStorage.getItem('user-token');
 
   constructor(private authService: AuthenticationService) {}
 

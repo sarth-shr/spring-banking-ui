@@ -2,12 +2,18 @@
 <div class="p-5 text-center bg-body-tertiary">
   <h1 class="mb-3">User Accounts</h1>
   <h4 class="mb-3">Manage and Open Accounts</h4>
-  <a data-mdb-ripple-init class="btn btn-primary" routerLink="open" role="button">
+  <a
+    data-mdb-ripple-init
+    class="btn btn-primary"
+    routerLink="open"
+    role="button"
+  >
     Open Account
   </a>
 </div>
 <!-- Jumbotron -->
-
+ 
+@if (accounts) {
 <!-- Accounts Table -->
 <section class="intro">
   <div class="bg-image h-100" style="background-color: #6095f0">
@@ -17,8 +23,9 @@
           <div class="col-12">
             <div class="card shadow-2-strong" style="background-color: #f5f7fa">
               <div class="card-body">
+                @if (accounts.data.pageable.totalElements>0) {
                 <div class="table-responsive">
-                  <table class="table table-borderless mb-0" style="text-align: center;">
+                  <table class="table table-borderless mb-0" style="text-align: center">
                     <thead>
                       <tr>
                         <th scope="col">ACCOUNT ID</th>
@@ -29,30 +36,34 @@
                         <!-- <th scope="col">CLOSE ACCOUNT</th> -->
                       </tr>
                     </thead>
-                    @if (accounts) {
                     <tbody>
-                      @for (account of accounts.data.content; track account.id) {
+                      @for (account of accounts.data.content; track account.id)
+                      {
                       <tr>
-                        <td>{{account.id}}</td>
-                        <td>{{account.type | uppercase}} A/C</td>
-                        <td>{{account.balance}}</td>
-                        <td>{{account.interest}}</td>
+                        <td>{{ account.id }}</td>
+                        <td>{{ account.type | uppercase }} A/C</td>
+                        <td>{{ account.balance }}</td>
+                        <td>{{ account.interest }}</td>
                         <td>
                           <button class="btn btn-info btn-sm px-3" (click)="goToDetails(account.id)">
                             <i class="fa-solid fa-circle-info"></i>
                           </button>
-                      </td>
+                        </td>
                         <!-- <td>
                           <button type="button" class="btn btn-danger btn-sm px-3">
                             <i class="fas fa-times"></i>
                           </button>
                         </td> -->
                       </tr>
-                    }
+                      }
                     </tbody>
-                  }
                   </table>
                 </div>
+                }@else {
+                <h3 style="text-align: center">
+                  Open an account & it will be listed here.
+                </h3>
+                }
               </div>
             </div>
           </div>
@@ -62,3 +73,6 @@
   </div>
 </section>
 <!-- Accounts Table -->
+}
+
+<mat-paginator [length]="totalItems" [pageSize]="pageSize" [pageIndex]="currentPage" (page)="pageChanged($event)"></mat-paginator>

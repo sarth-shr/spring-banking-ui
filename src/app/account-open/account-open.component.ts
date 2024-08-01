@@ -48,11 +48,11 @@ export class AccountOpenComponent {
       )
       .subscribe({
         next: (res: OkResponse) => {
-          console.log(res);
+          alert(res.message)
           this.router.navigate(['/accounts']);
         },
         error: (err: ErrorResponse) => {
-          console.log(err.error);
+          alert(err.error);
         },
       });
   }

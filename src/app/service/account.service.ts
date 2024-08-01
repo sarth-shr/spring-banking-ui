@@ -17,12 +17,11 @@ export class AccountService {
     return this.http.get<AccountListResponse>(`${this.baseUrl}`);
   }
 
-  getAllByEmail(email: string): Observable<AccountListResponse> {
+  getAllByEmail(email: string, page: number): Observable<AccountListResponse> {
     let params = new HttpParams();
     params = params.append('email', email);
-    return this.http.get<AccountListResponse>(`${this.baseUrl}/get-by-email`, {
-      params: params,
-    });
+    params = params.append('page', page)
+    return this.http.get<AccountListResponse>(`${this.baseUrl}/get-by-email`, {params});
   }
 
   get(accId: number): Observable<AccountResponse> {

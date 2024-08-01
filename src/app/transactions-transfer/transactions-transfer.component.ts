@@ -43,7 +43,7 @@ export class TransactionsTransferComponent {
   }
 
   private transferFunds() {
-    let fromId = sessionStorage.getItem('accId') as string;
+    let fromId = localStorage.getItem('accId') as string;
     let toId = this.form.get('toId')?.value as string;
     let amount = this.form.get('amount')?.value as string;
 
