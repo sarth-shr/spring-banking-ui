@@ -35,32 +35,47 @@ export class AuthenticationService {
   logout() {
     localStorage.removeItem('accId');
     localStorage.removeItem('user-token');
+    this.router.navigate([''])
   }
 
   isLoggedIn(): boolean {
     return localStorage.getItem('user-token') ? true : false;
   }
 
-  decodePayload() {
-    const token = localStorage.getItem('user-token') as string;
-    let payload = token.split('.')[1];
-    let decodedPayload = window.atob(payload);
-    let payloadObject = JSON.parse(decodedPayload);
-    return payloadObject;
+  getToken() {
+    return localStorage.getItem('user-token');
   }
 
-  extractSubject(): string {
-    let payload = this.decodePayload();
-    return payload.sub;
+  getPayload() {
+    const token = this.getToken();
+    if (token) {
+      let payload = token.split('.')[1];
+      let decodedPayload = window.atob(payload);
+      let payloadObject = JSON.parse(decodedPayload);
+      return payloadObject;
+    }
   }
 
-  extractAuthorities(): string {
-    let payload = this.decodePayload();
-    return payload.authorities;
+  extractSubject() {
+    let payload = this.getPayload();
+    if (payload) {
+      return payload.sub;
+    }
+  }
+
+  extractAuthorities() {
+    let payload = this.getPayload();
+    if (payload) {
+      return payload.authorities;
+    }
   }
 
   isAdmin(): boolean {
-    return this.extractAuthorities().includes('ADMIN') ? true : false;
+    const authorities = this.extractAuthorities();
+    if (authorities) {
+      return authorities.includes('ADMIN') ? true : false;
+    }
+    return false;
   }
 
   forbiddenAccess() {

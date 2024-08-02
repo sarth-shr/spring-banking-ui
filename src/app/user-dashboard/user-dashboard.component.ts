@@ -34,11 +34,13 @@ export class UserDashboardComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.getCustomer();
-    this.getCustomers();
-    this.getAccounts();
-    this.getTransactions();
     this.isAdmin = this.authService.isAdmin();
+    if (this.isAdmin) {
+      this.getCustomers();
+      this.getAccounts();
+      this.getTransactions();
+    }
+    this.getCustomer();
   }
 
   private getCustomer() {

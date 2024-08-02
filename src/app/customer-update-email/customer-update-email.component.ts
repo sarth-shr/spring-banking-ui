@@ -23,12 +23,15 @@ export class CustomerUpdateEmailComponent implements OnInit {
   isSumitted = false;
   customer!: CustomerResponse;
   form = new FormGroup({
-    updatedEmail: new FormControl('', [Validators.required, Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]),
+    updatedEmail: new FormControl('', [
+      Validators.required,
+      Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$'),
+    ]),
   });
 
   constructor(
     private customerService: CustomerService,
-    private authService: AuthenticationService,
+    private authService: AuthenticationService
   ) {}
 
   ngOnInit(): void {
@@ -56,11 +59,12 @@ export class CustomerUpdateEmailComponent implements OnInit {
       .updateEmail(this.form.value, this.authService.extractSubject())
       .subscribe({
         next: (res: OkResponse) => {
-          alert(res.message+"\nYou will now be logged out");
+          alert(res.message + '\nYou will now be logged out');
           this.authService.logout();
         },
         error: (err: ErrorResponse) => {
-          alert(err.error+"\nTry Again!");
+          alert(err.error + '\nTry Again!');
+          window.location.reload();
         },
       });
   }
