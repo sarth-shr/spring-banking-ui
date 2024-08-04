@@ -39,8 +39,8 @@ export class AccountComponent implements OnInit {
       .subscribe({
         next: (res: AccountListResponse) => {
           this.accounts = res;
-          this.totalItems = res.data.pageable.totalElements;
-          this.pageSize = res.data.pageable.pageSize;
+          this.totalItems = res.data.totalItems;
+          this.pageSize = res.data.pageSize;
         },
         error: (err: ErrorResponse) => {
           console.log(err);
@@ -49,8 +49,7 @@ export class AccountComponent implements OnInit {
   }
 
   goToDetails(id: number) {
-    localStorage.setItem('accId', id.toString());
-    this.router.navigate(['details'], {
+    this.router.navigate(['./', id], {
       relativeTo: this.route,
     });
   }

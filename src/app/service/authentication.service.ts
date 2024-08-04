@@ -35,7 +35,7 @@ export class AuthenticationService {
   logout() {
     localStorage.removeItem('accId');
     localStorage.removeItem('user-token');
-    this.router.navigate([''])
+    this.router.navigate(['']);
   }
 
   isLoggedIn(): boolean {
@@ -57,25 +57,11 @@ export class AuthenticationService {
   }
 
   extractSubject() {
-    let payload = this.getPayload();
-    if (payload) {
-      return payload.sub;
-    }
+    return this.getPayload().sub ;
   }
 
-  extractAuthorities() {
-    let payload = this.getPayload();
-    if (payload) {
-      return payload.authorities;
-    }
-  }
-
-  isAdmin(): boolean {
-    const authorities = this.extractAuthorities();
-    if (authorities) {
-      return authorities.includes('ADMIN') ? true : false;
-    }
-    return false;
+  isAdmin() {
+    return this.getPayload()?.admin ? true : false;
   }
 
   forbiddenAccess() {

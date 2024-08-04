@@ -4,6 +4,7 @@ import { TransactionService } from '../service/transaction.service';
 import { ErrorResponse } from '../api/response/error-response';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { DatePipe } from '@angular/common';
+import { Transaction } from '../model/transaction';
 
 @Component({
   selector: 'app-admin-dashboard-transactions',
@@ -13,10 +14,12 @@ import { DatePipe } from '@angular/common';
   styleUrl: './admin-dashboard-transactions.component.css'
 })
 export class AdminDashboardTransactionsComponent implements OnInit{
+  sortedData!: Transaction[];
   transactions!: TransactionListResponse;
-  totalItems!: number;
-  pageSize!: number;
+  
   currentPage = 0;
+  pageSize!: number;
+  totalItems!: number;
 
   constructor(private transactionService: TransactionService){}
 
@@ -28,8 +31,8 @@ export class AdminDashboardTransactionsComponent implements OnInit{
     this.transactionService.getAll(currentPage).subscribe({
       next: (res: TransactionListResponse)=>{
         this.transactions = res;
-        this.totalItems = res.data.pageable.totalElements;
-        this.pageSize = res.data.pageable.pageSize;
+        this.totalItems = res.data.totalItems;
+        this.pageSize = res.data.pageSize;
       },
       error: (err: ErrorResponse) => {
         console.log(err.error);

@@ -27,8 +27,8 @@ export class AdminDashboardCustomersComponent implements OnInit {
     this.customerService.getAll(currentPage).subscribe({
       next: (res: CustomerListResponse) =>{
         this.customers = res;
-        this.totalItems = res.data.pageable.totalElements;
-        this.pageSize = res.data.pageable.pageSize;
+        this.totalItems = res.data.totalItems;
+        this.pageSize = res.data.pageSize;
       },
       error: (err: ErrorResponse) => {
         console.log(err.error);

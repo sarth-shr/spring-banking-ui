@@ -63,23 +63,13 @@
   <!-- Jumbotron -->
 <div class="p-5 text-center bg-body-tertiary">
   <h1 class="mb-3">ADMIN DASHBOARD</h1>
-  <a data-mdb-ripple-init class="btn btn-primary" routerLink="/admin/customers" role="button">
-      View Customers
-  </a>
-  <a data-mdb-ripple-init class="btn btn-primary" routerLink="/admin/accounts" role="button">
-      View Accounts
-  </a>
-  <a data-mdb-ripple-init class="btn btn-primary" routerLink="/admin/transactions" role="button">
-      View Transactions
-  </a>
-  
 </div>
 <!-- Jumbotron -->
 
-
+@if(customers && accounts && transactions){
 <div class="container-admin">
-<div class="row ">
-    <div class="col-xl-4 col-lg-6">
+<div class="row">
+    <div class="col-xl-4 col-lg-6" (click)="goToCustomers()" style="cursor: pointer;">
         <div class="card l-bg-cherry">
             <div class="card-statistic-3 p-4">
                 <div class="card-icon card-icon-large"><i class="fas fa-users"></i></div>
@@ -89,7 +79,7 @@
                 <div class="row align-items-center mb-2 d-flex">
                     <div class="col-8">
                         <h2 class="d-flex align-items-center mb-0">
-                            {{customers.data.pageable.totalElements}}
+                            {{customers.data.totalItems}}
                         </h2>
                     </div>
                 </div>
@@ -97,7 +87,7 @@
         </div>
     </div>
     <div class="col-xl-4 col-lg-6">
-        <div class="card l-bg-blue-dark">
+        <div class="card l-bg-blue-dark" (click)="goToAccounts()" style="cursor: pointer;">
             <div class="card-statistic-3 p-4">
                 <div class="card-icon card-icon-large"><i class="fas fa-money-check"></i></div>
                 <div class="mb-4">
@@ -106,7 +96,7 @@
                 <div class="row align-items-center mb-2 d-flex">
                     <div class="col-8">
                         <h2 class="d-flex align-items-center mb-0">
-                            {{accounts.data.pageable.totalElements}}
+                            {{accounts.data.totalItems}}
                         </h2>
                     </div>
                 </div>
@@ -114,7 +104,7 @@
         </div>
     </div>
     <div class="col-xl-4 col-lg-6">
-        <div class="card l-bg-green-dark">
+        <div class="card l-bg-green-dark" (click)="goToTransactions()" style="cursor: pointer">
             <div class="card-statistic-3 p-4">
                 <div class="card-icon card-icon-large"><i class="fas fa-money-bill-trend-up"></i></div>
                 <div class="mb-4">
@@ -123,7 +113,7 @@
                 <div class="row align-items-center mb-2 d-flex">
                     <div class="col-8">
                         <h2 class="d-flex align-items-center mb-0">
-                          {{transactions.data.pageable.totalElements}}
+                          {{transactions.data.totalItems}}
                         </h2>
                     </div>
                 </div>
@@ -132,4 +122,5 @@
     </div>
   </div>
 </div>
+}
 }

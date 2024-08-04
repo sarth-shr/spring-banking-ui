@@ -1,16 +1,9 @@
+import { Customer } from "../../model/customer";
+
 export interface CustomerListPageable {
-  content: [
-    {
-      firstName: string;
-      lastName: string;
-      email: string;
-      initialDeposit: number;
-    }
-  ];
-  pageable: {
-    pageNumber: number;
-    pageSize: number;
-    totalPages: number;
-    totalElements: number;
-  };
+  content: Customer[];
+  totalItems: number;
+  totalPages: number;
+  pageSize: number;
+  pageNumber: number;
 }

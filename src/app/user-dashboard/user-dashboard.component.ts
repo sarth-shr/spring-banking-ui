@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { AccountListResponse } from '../api/response/account-list-response';
 import { CustomerListResponse } from '../api/response/customer-list-response';
 import { CustomerResponse } from '../api/response/customer-response';
@@ -9,11 +9,12 @@ import { AccountService } from '../service/account.service';
 import { AuthenticationService } from '../service/authentication.service';
 import { CustomerService } from '../service/customer.service';
 import { TransactionService } from '../service/transaction.service';
+import { MatProgressBar } from '@angular/material/progress-bar';
 
 @Component({
   selector: 'app-customer-profile',
   standalone: true,
-  imports: [RouterLink],
+  imports: [RouterLink, MatProgressBar],
   templateUrl: './user-dashboard.component.html',
   styleUrl: './user-dashboard.component.css',
 })
@@ -30,7 +31,8 @@ export class UserDashboardComponent implements OnInit {
     private customerService: CustomerService,
     private accountService: AccountService,
     private transactionService: TransactionService,
-    private authService: AuthenticationService
+    private authService: AuthenticationService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -39,8 +41,9 @@ export class UserDashboardComponent implements OnInit {
       this.getCustomers();
       this.getAccounts();
       this.getTransactions();
+    } else {
+      this.getCustomer();
     }
-    this.getCustomer();
   }
 
   private getCustomer() {
@@ -70,5 +73,17 @@ export class UserDashboardComponent implements OnInit {
     this.transactionService.getAll(this.currentPage).subscribe((res) => {
       this.transactions = res;
     });
+  }
+
+  goToCustomers() {
+    this.router.navigate(['/admin/customers']);
+  }
+
+  goToAccounts() {
+    this.router.navigate(['/admin/accounts']);
+  }
+
+  goToTransactions() {
+    this.router.navigate(['/admin/transactions']);
   }
 }

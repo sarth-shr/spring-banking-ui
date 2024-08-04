@@ -5,7 +5,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { Router, RouteReuseStrategy, RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { ErrorResponse } from '../api/response/error-response';
 import { OkResponse } from '../api/response/ok-response';
 import { AuthenticationService } from '../service/authentication.service';
@@ -39,6 +39,7 @@ export class RegisterComponent {
     password: new FormControl('', [
       Validators.required,
       Validators.minLength(8),
+      Validators.pattern('^\\S+$')
     ]),
     initialDeposit: new FormControl('', [
       Validators.required,

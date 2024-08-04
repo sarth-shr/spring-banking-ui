@@ -18,7 +18,7 @@
         <small class="text-danger">Required Field</small>
       }
       @if (email?.hasError('pattern') && email?.dirty) {
-        <small class="text-danger">Malformed Email Address</small>
+        <small class="text-danger">Invalid Email Address</small>
       }
       <input type="text" class="form-control" id="email" formControlName="email" [class.is-invalid]="email?.invalid && email?.dirty">
     </div>
@@ -34,7 +34,6 @@
     <div class="form-group">
     <button type="submit" class="btn btn-primary" [disabled]="form.invalid">Sign In</button>
     </div>
-    <p style="margin-top: 20px;">Not a member? <a routerLink="/register" style="text-decoration: none;">Register Now</a> </p>
   </form>
 </div>
 }

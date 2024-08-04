@@ -52,7 +52,7 @@
             <small class="text-danger">Required Field</small>
           }
           @if (email?.hasError('pattern') && email?.dirty && !email?.hasError('spam')) {
-            <small class="text-danger">Malformed Email Address</small>
+            <small class="text-danger">Invalid Email Address</small>
           }
           @if (email?.hasError('spam') && email?.dirty) {
             <small class="text-danger">Spam Detection</small>
@@ -67,8 +67,11 @@
           @if (password?.hasError('required') && password?.dirty) {
             <small class="text-danger">Required Field</small>
           }
-          @if (password?.hasError('minlength') && password?.dirty) {
+          @if (password?.hasError('minlength') && password?.dirty && !password?.hasError('pattern')) {
             <small class="text-danger">Minimum of 8 characters</small>
+          }
+          @if (password?.hasError('pattern') && password?.dirty) {
+            <small class="text-danger">Whitespace not allowed</small>
           }
           <input type="password" formControlName="password" id="password" class="form-control" [class.is-invalid]="password?.invalid && password?.dirty"/>
         </div>
@@ -92,8 +95,6 @@
     <div class="form-group">
       <button type="submit" class="btn btn-primary" [disabled]="form.invalid">Register</button>
     </div>
-
-    <p style="margin-top: 20px">Have an account? <a routerLink="/login" style="text-decoration: none;">Sign In</a> </p>
   </form>
 </div>
 }

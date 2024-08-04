@@ -31,8 +31,8 @@ export class TransactionsHistoryComponent implements OnInit{
     this.transactionService.getByAccId(parseInt(this.accId), currentPage).subscribe({
       next: (res) => {
         this.transactions = res;
-        this.totalItems = res.data.pageable.totalElements;
-        this.pageSize = res.data.pageable.pageSize;
+        this.totalItems = res.data.totalItems;
+        this.pageSize = res.data.totalItems;
         console.log(res);
       },
       error: (err: ErrorResponse) => {
