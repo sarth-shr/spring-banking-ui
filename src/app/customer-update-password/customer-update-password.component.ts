@@ -6,11 +6,10 @@ import {
   Validators,
 } from '@angular/forms';
 import { RouterLink } from '@angular/router';
+import { OkResponse } from '../api/response/ok-response';
+import { AuthenticationService } from '../service/authentication.service';
 import { CustomerService } from '../service/customer.service';
 import { PasswordValidator } from '../validators/password-validator';
-import { AuthenticationService } from '../service/authentication.service';
-import { OkResponse } from '../api/response/ok-response';
-import { ErrorResponse } from '../api/response/error-response';
 
 @Component({
   selector: 'app-customer-update-password',
@@ -23,10 +22,14 @@ export class CustomerUpdatePasswordComponent {
   isSubmitted = false;
   form = new FormGroup(
     {
-      currentPassword: new FormControl('', [Validators.required]),
+      currentPassword: new FormControl('', [
+        Validators.required,
+        Validators.pattern('^\\S+$'),
+      ]),
       password: new FormControl('', [
         Validators.required,
         Validators.minLength(8),
+        Validators.pattern('^\\S+$'),
       ]),
       confirmPassword: new FormControl('', [Validators.required]),
     },
@@ -51,11 +54,8 @@ export class CustomerUpdatePasswordComponent {
       )
       .subscribe({
         next: (res: OkResponse) => {
-          alert(res.message+"\nPlease log in again");
+          alert(res.message + '\nPlease log in again');
           this.authService.logout();
-        },
-        error: (err: ErrorResponse) => {
-          alert(err.error+"\nTry again");
         },
       });
   }

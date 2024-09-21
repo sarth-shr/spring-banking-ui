@@ -7,7 +7,7 @@
   </a>
 </div>
 <!-- Jumbotron -->
- 
+
 @if (accounts) {
 <!-- Accounts Table -->
 <section class="intro">
@@ -18,28 +18,28 @@
           <div class="col-12">
             <div class="card shadow-2-strong" style="background-color: #f5f7fa">
               <div class="card-body">
-                @if (accounts.data.totalItems > 0) {
+                @if (accounts.response.totalItems > 0) {
                 <div class="table-responsive">
                   <table class="table table-borderless mb-0" style="text-align: center">
                     <thead>
                       <tr>
-                        <th scope="col">ACCOUNT ID</th>
-                        <th scope="col">ACCOUNT TYPE</th>
+                        <th scope="col">A/C #</th>
+                        <th scope="col">TYPE</th>
                         <th scope="col">BALANCE</th>
                         <th scope="col">INTEREST RATE</th>
                         <th scope="col">DETAILS</th>
                       </tr>
                     </thead>
                     <tbody>
-                      @for (account of accounts.data.content; track account.id)
-                      {
+                      @for (account of accounts.response.content; track
+                      account.accountNumber) {
                       <tr>
-                        <td>{{ account.id }}</td>
+                        <td>{{ account.accountNumber }}</td>
                         <td>{{ account.type | uppercase }} A/C</td>
                         <td>{{ account.balance }}</td>
                         <td>{{ account.interest }}</td>
                         <td>
-                          <button class="btn btn-info btn-sm px-3" (click)="goToDetails(account.id)">
+                          <button class="btn btn-info btn-sm px-3" (click)="goToDetails(account.accountNumber)">
                             <i class="fa-solid fa-circle-info"></i>
                           </button>
                         </td>
@@ -63,7 +63,6 @@
 </section>
 <!-- Accounts Table -->
 
-@if (accounts.data.totalItems > 0 ) {
-  <mat-paginator [length]="totalItems" [pageSize]="pageSize" [pageIndex]="currentPage" (page)="pageChanged($event)"></mat-paginator>
-}
-}
+@if (accounts.response.totalItems > 0 ) {
+<mat-paginator [length]="totalItems" [pageSize]="pageSize" [pageIndex]="currentPage" (page)="pageChanged($event)"></mat-paginator>
+} }

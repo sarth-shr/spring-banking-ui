@@ -6,5 +6,5 @@ export interface AccountResponse {
   code: number;
   status: HttpStatusCode;
   message: string;
-  data: Account;
+  response: Account;
 }

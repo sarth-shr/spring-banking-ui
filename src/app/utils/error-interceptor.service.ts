@@ -27,6 +27,8 @@ export class ErrorInterceptorService implements HttpInterceptor{
         `Backend returned code ${error.status}, body was: `,
         error.error
       );
+      alert(httpError.message);
+      window.location.reload(); 
     }
     // Return an observable with a user-facing error message.
     return throwError(() => httpError);

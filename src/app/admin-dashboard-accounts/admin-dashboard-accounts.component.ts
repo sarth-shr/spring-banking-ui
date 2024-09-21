@@ -17,11 +17,11 @@ import { AccountService } from '../service/account.service';
 export class AdminDashboardAccountsComponent implements OnInit {
   accounts!: AccountListResponse;
   sortedData!: Account[];
-  
+
   currentPage = 0;
   pageSize!: number;
   totalItems!: number;
-  
+
   constructor(private accountService: AccountService) {}
 
   ngOnInit(): void {
@@ -32,12 +32,9 @@ export class AdminDashboardAccountsComponent implements OnInit {
     this.accountService.getAll(currentPage).subscribe({
       next: (res: AccountListResponse) => {
         this.accounts = res;
-        this.sortedData = this.accounts.data.content;
-        this.totalItems = res.data.totalItems;
-        this.pageSize = res.data.pageSize;
-      },
-      error: (err: ErrorResponse) => {
-        console.log(err.error);
+        this.sortedData = this.accounts.response.content;
+        this.totalItems = res.response.totalItems;
+        this.pageSize = res.response.pageSize;
       },
     });
   }
@@ -48,7 +45,7 @@ export class AdminDashboardAccountsComponent implements OnInit {
   }
 
   sortData(sort: Sort) {
-    const data = this.accounts.data.content;
+    const data = this.accounts.response.content;
     if (!sort.active || sort.direction === '') {
       this.sortedData = data;
       return;
@@ -58,7 +55,7 @@ export class AdminDashboardAccountsComponent implements OnInit {
       const isAsc = sort.direction === 'asc';
       switch (sort.active) {
         case 'id':
-          return this.compare(a.id, b.id, isAsc);
+          return this.compare(a.accountNumber, b.accountNumber, isAsc);
         case 'type':
           return this.compare(a.type, b.type, isAsc);
         case 'balance':

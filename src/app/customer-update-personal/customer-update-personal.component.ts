@@ -55,9 +55,6 @@ export class CustomerUpdatePersonalComponent implements OnInit {
         alert(res.message);
         this.router.navigate(['../']);
       },
-      error: (err: ErrorResponse) => {
-        alert(err.error);
-      },
     });
   }
 
@@ -65,9 +62,6 @@ export class CustomerUpdatePersonalComponent implements OnInit {
     this.customerService.get(this.authService.extractSubject()).subscribe({
       next: (res: CustomerResponse) => {
         this.customer = res;
-      },
-      error: (err: ErrorResponse) => {
-        alert(err.error);
       },
     });
   }

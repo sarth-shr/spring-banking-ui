@@ -43,9 +43,9 @@ export class CustomerService {
     return this.http.put<OkResponse>(`${this.baseUrl}/update/email`, customer, {params: params});
   }
 
-  updatePassword(currentPassword: any, password: any, email: string):Observable<OkResponse>{
+  updatePassword(currentPassword: any, updatedPassword: any, email: string):Observable<OkResponse>{
     let params = new HttpParams();
     params = params.append('email', email);
-    return this.http.put<OkResponse>(`${this.baseUrl}/update/password`, {currentPassword, password}, {params: params})
+    return this.http.put<OkResponse>(`${this.baseUrl}/update/password`, {currentPassword, updatedPassword}, {params: params})
   }
 }

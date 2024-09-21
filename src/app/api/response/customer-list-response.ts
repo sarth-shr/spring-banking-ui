@@ -6,5 +6,5 @@ export interface CustomerListResponse {
   code: number;
   status: HttpStatusCode;
   message: string;
-  data: CustomerListPageable;
+  response: CustomerListPageable;
 }

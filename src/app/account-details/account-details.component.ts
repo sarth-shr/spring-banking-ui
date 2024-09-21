@@ -1,10 +1,9 @@
 import { UpperCasePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { AccountResponse } from '../api/response/account-response';
-import { ErrorResponse } from '../api/response/error-response';
-import { AccountService } from '../service/account.service';
 import { PageNotFoundComponent } from '../page-not-found/page-not-found.component';
+import { AccountService } from '../service/account.service';
 
 @Component({
   selector: 'app-customer-account-details',
@@ -15,24 +14,17 @@ import { PageNotFoundComponent } from '../page-not-found/page-not-found.componen
 })
 export class AccountDetailsComponent implements OnInit {
   account!: AccountResponse;
-  id!: string;
 
   constructor(
     private accountService: AccountService,
     private router: Router,
-    private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
-    this.route.paramMap.subscribe((params) => {
-      this.id = params.get('id') as string;
-    });
-    this.accountService.get(parseInt(this.id)).subscribe({
+    let accNumber = localStorage.getItem("accNumber") as string;
+    this.accountService.get(accNumber).subscribe({
       next: (res: AccountResponse) => {
         this.account = res;
-      },
-      error: (err: ErrorResponse) => {
-        console.log(err.error);
       },
     });
   }

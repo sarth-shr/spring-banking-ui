@@ -24,22 +24,22 @@ export class RegisterComponent {
     firstName: new FormControl('', [
       Validators.required,
       Validators.pattern('[a-zA-Z]*'),
-      SpamValidator
+      SpamValidator,
     ]),
     lastName: new FormControl('', [
       Validators.required,
       Validators.pattern('[a-zA-Z]*'),
-      SpamValidator
+      SpamValidator,
     ]),
     email: new FormControl('', [
       Validators.required,
       Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$'),
-      SpamValidator
+      SpamValidator,
     ]),
     password: new FormControl('', [
       Validators.required,
       Validators.minLength(8),
-      Validators.pattern('^\\S+$')
+      Validators.pattern('^\\S+$'),
     ]),
     initialDeposit: new FormControl('', [
       Validators.required,
@@ -63,10 +63,6 @@ export class RegisterComponent {
       next: (res: OkResponse) => {
         alert(res.message);
         this.router.navigate(['/login']);
-      },
-      error: (err: ErrorResponse) => {
-        alert(err.error);
-        window.location.reload();
       },
     });
   }

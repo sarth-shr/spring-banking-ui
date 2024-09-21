@@ -1,7 +1,7 @@
 <!-- Jumbotron -->
 <div class="p-5 text-center bg-body-tertiary">
   <h1 class="mb-3">Transaction History</h1>
-    <h4 class="mb-3">View All Committed Transactions</h4>
+  <h4 class="mb-3">View All Committed Transactions</h4>
 </div>
 <!-- Jumbotron -->
 
@@ -12,9 +12,12 @@
     <div class="col-12">
       <div class="card shadow-2-strong" style="background-color: #f5f7fa">
         <div class="card-body">
-          @if (transactions.data.totalItems > 0) {
+          @if (transactions.response.totalItems > 0) {
           <div class="table-responsive">
-            <table class="table table-borderless mb-0" style="text-align: center">
+            <table
+              class="table table-borderless mb-0"
+              style="text-align: center"
+            >
               <thead>
                 <tr>
                   <th scope="col">TRANSACTION #</th>
@@ -30,15 +33,15 @@
                 </tr>
               </thead>
               <tbody>
-                @for (transaction of transactions.data.content; track
-                transaction.id) {
+                @for (transaction of transactions.response.content; track
+                transaction.transactionNumber) {
                 <tr>
-                  <td>{{ transaction.id }}</td>
+                  <td>{{ transaction.transactionNumber }}</td>
                   <td>{{ transaction.date | date : "medium" }}</td>
                   <td>{{ transaction.type }}</td>
                   <td>{{ transaction.amount }}</td>
-                  @if (transaction.fromAccountId) {
-                  <td>{{ transaction.fromAccountId }}</td>
+                  @if (transaction.fromAccNumber) {
+                  <td>{{ transaction.fromAccNumber }}</td>
                   <td>{{ transaction.fromAccOldBalance }}</td>
                   <td>{{ transaction.fromAccNewBalance }}</td>
                   }@else{
@@ -46,7 +49,7 @@
                   <td>---</td>
                   <td>---</td>
                   }
-                  <td>{{ transaction.toAccountId }}</td>
+                  <td>{{ transaction.toAccNumber }}</td>
                   <td>{{ transaction.toAccOldBalance }}</td>
                   <td>{{ transaction.toAccNewBalance }}</td>
                 </tr>
@@ -55,9 +58,7 @@
             </table>
           </div>
           }@else {
-          <h3 style="text-align: center">
-            No Transactions Have Been Perfomred Yet
-          </h3>
+          <h3 style="text-align: center">No Available Transactions</h3>
           }
         </div>
       </div>
@@ -66,7 +67,11 @@
 </section>
 <!-- Transactions Table -->
 
-@if (transactions.data.totalItems) {
-  <mat-paginator [length]="totalItems" [pageSize]="pageSize" [pageIndex]="currentPage" (page)="pageChanged($event)"></mat-paginator>
-}
-}
+@if (transactions.response.totalItems) {
+<mat-paginator
+  [length]="totalItems"
+  [pageSize]="pageSize"
+  [pageIndex]="currentPage"
+  (page)="pageChanged($event)"
+></mat-paginator>
+} }

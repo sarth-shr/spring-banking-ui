@@ -1,12 +1,12 @@
 export interface Transaction {
-  id: number;
   date: Date;
   type: string;
+  transactionNumber: string;
   amount: number;
-  fromAccountId: number;
+  fromAccNumber: string;
   fromAccOldBalance: number;
   fromAccNewBalance: number;
-  toAccountId: number;
+  toAccNumber: number;
   toAccOldBalance: number;
   toAccNewBalance: number;
 }

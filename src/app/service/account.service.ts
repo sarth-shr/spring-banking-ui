@@ -26,9 +26,9 @@ export class AccountService {
     return this.http.get<AccountListResponse>(`${this.baseUrl}/get-by-email`, {params});
   }
 
-  get(accId: number): Observable<AccountResponse> {
+  get(accNumber: string): Observable<AccountResponse> {
     let params = new HttpParams();
-    params = params.append('accId', accId);
+    params = params.append('accNumber', accNumber);
     return this.http.get<AccountResponse>(`${this.baseUrl}/get-by-id`, {
       params: params,
     });

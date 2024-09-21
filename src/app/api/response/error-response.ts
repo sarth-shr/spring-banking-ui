@@ -4,5 +4,5 @@ export interface ErrorResponse {
   timestamp: Date;
   code: number;
   status: HttpStatusCode;
-  error: string;
+  message: string;
 }

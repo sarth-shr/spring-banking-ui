@@ -7,10 +7,22 @@
       <div class="col col-lg-6 mb-4 mb-lg-0">
         <div class="card mb-3" style="border-radius: 0.5rem">
           <div class="row g-0">
-            <div class="col-md-4 gradient-custom text-center text-white" style="border-top-left-radius: 0.5rem; border-bottom-left-radius: 0.5rem;">
-              <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp" alt="Avatar" class="img-fluid my-5" style="width: 80px"/>
+            <div
+              class="col-md-4 gradient-custom text-center text-white"
+              style="
+                border-top-left-radius: 0.5rem;
+                border-bottom-left-radius: 0.5rem;
+              "
+            >
+              <img
+                src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp"
+                alt="Avatar"
+                class="img-fluid my-5"
+                style="width: 80px"
+              />
               <h5>
-                {{ customer.data.firstName }} {{ customer.data.lastName }}
+                {{ customer.response.firstName }}
+                {{ customer.response.lastName }}
               </h5>
             </div>
             <div class="col-md-8">
@@ -20,11 +32,11 @@
                 <div class="row pt-1">
                   <div class="col-6 mb-3">
                     <h6>First Name</h6>
-                    <p class="text-muted">{{ customer.data.firstName }}</p>
+                    <p class="text-muted">{{ customer.response.firstName }}</p>
                   </div>
                   <div class="col-6 mb-3">
                     <h6>Last Name</h6>
-                    <p class="text-muted">{{ customer.data.lastName }}</p>
+                    <p class="text-muted">{{ customer.response.lastName }}</p>
                   </div>
                   <div class="col-12">
                     <a routerLink="update-personal">
@@ -37,7 +49,7 @@
                 <div class="row pt-1">
                   <div class="col-12 mb-3">
                     <h6>Email Address</h6>
-                    <p class="text-muted">{{ customer.data.email }}</p>
+                    <p class="text-muted">{{ customer.response.email }}</p>
                   </div>
                   <div class="col-12 mb-3">
                     <a routerLink="update-email">
@@ -55,12 +67,10 @@
 </section>
 }
 
-
 <!-- ADMIN SECTION -->
 
-
 @if (isAdmin) {
-  <!-- Jumbotron -->
+<!-- Jumbotron -->
 <div class="p-5 text-center bg-body-tertiary">
   <h1 class="mb-3">ADMIN DASHBOARD</h1>
 </div>
@@ -68,59 +78,76 @@
 
 @if(customers && accounts && transactions){
 <div class="container-admin">
-<div class="row">
-    <div class="col-xl-4 col-lg-6" (click)="goToCustomers()" style="cursor: pointer;">
-        <div class="card l-bg-cherry">
-            <div class="card-statistic-3 p-4">
-                <div class="card-icon card-icon-large"><i class="fas fa-users"></i></div>
-                <div class="mb-4">
-                    <h5 class="card-title mb-0">Customers Registered</h5>
-                </div>
-                <div class="row align-items-center mb-2 d-flex">
-                    <div class="col-8">
-                        <h2 class="d-flex align-items-center mb-0">
-                            {{customers.data.totalItems}}
-                        </h2>
-                    </div>
-                </div>
+  <div class="row">
+    <div
+      class="col-xl-4 col-lg-6"
+      (click)="goToCustomers()"
+      style="cursor: pointer"
+    >
+      <div class="card l-bg-cherry">
+        <div class="card-statistic-3 p-4">
+          <div class="card-icon card-icon-large">
+            <i class="fas fa-users"></i>
+          </div>
+          <div class="mb-4">
+            <h5 class="card-title mb-0">Customers Registered</h5>
+          </div>
+          <div class="row align-items-center mb-2 d-flex">
+            <div class="col-8">
+              <h2 class="d-flex align-items-center mb-0">
+                {{ customers.response.totalItems }}
+              </h2>
             </div>
+          </div>
         </div>
+      </div>
     </div>
     <div class="col-xl-4 col-lg-6">
-        <div class="card l-bg-blue-dark" (click)="goToAccounts()" style="cursor: pointer;">
-            <div class="card-statistic-3 p-4">
-                <div class="card-icon card-icon-large"><i class="fas fa-money-check"></i></div>
-                <div class="mb-4">
-                    <h5 class="card-title mb-0">Accounts Opened</h5>
-                </div>
-                <div class="row align-items-center mb-2 d-flex">
-                    <div class="col-8">
-                        <h2 class="d-flex align-items-center mb-0">
-                            {{accounts.data.totalItems}}
-                        </h2>
-                    </div>
-                </div>
+      <div
+        class="card l-bg-blue-dark"
+        (click)="goToAccounts()"
+        style="cursor: pointer"
+      >
+        <div class="card-statistic-3 p-4">
+          <div class="card-icon card-icon-large">
+            <i class="fas fa-money-check"></i>
+          </div>
+          <div class="mb-4">
+            <h5 class="card-title mb-0">Accounts Opened</h5>
+          </div>
+          <div class="row align-items-center mb-2 d-flex">
+            <div class="col-8">
+              <h2 class="d-flex align-items-center mb-0">
+                {{ accounts.response.totalItems }}
+              </h2>
             </div>
+          </div>
         </div>
+      </div>
     </div>
     <div class="col-xl-4 col-lg-6">
-        <div class="card l-bg-green-dark" (click)="goToTransactions()" style="cursor: pointer">
-            <div class="card-statistic-3 p-4">
-                <div class="card-icon card-icon-large"><i class="fas fa-money-bill-trend-up"></i></div>
-                <div class="mb-4">
-                    <h5 class="card-title mb-0">Transactions Committed</h5>
-                </div>
-                <div class="row align-items-center mb-2 d-flex">
-                    <div class="col-8">
-                        <h2 class="d-flex align-items-center mb-0">
-                          {{transactions.data.totalItems}}
-                        </h2>
-                    </div>
-                </div>
+      <div
+        class="card l-bg-green-dark"
+        (click)="goToTransactions()"
+        style="cursor: pointer"
+      >
+        <div class="card-statistic-3 p-4">
+          <div class="card-icon card-icon-large">
+            <i class="fas fa-money-bill-trend-up"></i>
+          </div>
+          <div class="mb-4">
+            <h5 class="card-title mb-0">Transactions Committed</h5>
+          </div>
+          <div class="row align-items-center mb-2 d-flex">
+            <div class="col-8">
+              <h2 class="d-flex align-items-center mb-0">
+                {{ transactions.response.totalItems }}
+              </h2>
             </div>
+          </div>
         </div>
+      </div>
     </div>
   </div>
 </div>
-}
-}
+} }

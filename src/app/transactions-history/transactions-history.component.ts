@@ -1,9 +1,8 @@
+import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { ErrorResponse } from '../api/response/error-response';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { TransactionListResponse } from '../api/response/transaction-list-response';
 import { TransactionService } from '../service/transaction.service';
-import { DatePipe } from '@angular/common';
-import { MatPaginator, PageEvent } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-transactions-history',
@@ -12,9 +11,8 @@ import { MatPaginator, PageEvent } from '@angular/material/paginator';
   templateUrl: './transactions-history.component.html',
   styleUrl: './transactions-history.component.css',
 })
-export class TransactionsHistoryComponent implements OnInit{
+export class TransactionsHistoryComponent implements OnInit {
   transactions!: TransactionListResponse;
-  accId!: number | string;
 
   totalItems!: number;
   pageSize!: number;
@@ -27,18 +25,12 @@ export class TransactionsHistoryComponent implements OnInit{
   }
 
   private getTransactions(currentPage: number) {
-    this.accId = localStorage.getItem('accId') as string;
-    this.transactionService.getByAccId(parseInt(this.accId), currentPage).subscribe({
+    let accNumber = localStorage.getItem('accNumber') as string;
+    this.transactionService.getByAccNumber(accNumber, currentPage).subscribe({
       next: (res) => {
         this.transactions = res;
-        this.totalItems = res.data.totalItems;
-        this.pageSize = res.data.totalItems;
-        console.log(res);
-      },
-      error: (err: ErrorResponse) => {
-        console.log(err);
-        console.log(this.transactions);
-        
+        this.totalItems = res.response.totalItems;
+        this.pageSize = res.response.pageSize;
       },
     });
   }
@@ -47,5 +39,4 @@ export class TransactionsHistoryComponent implements OnInit{
     this.currentPage = event.pageIndex;
     this.getTransactions(this.currentPage);
   }
-
 }

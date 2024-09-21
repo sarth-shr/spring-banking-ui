@@ -12,48 +12,42 @@ export class TransactionService {
 
   constructor(private http: HttpClient) {}
 
-  getAll(page: number): Observable<TransactionListResponse>{
+  getAll(page: number): Observable<TransactionListResponse> {
     let params = new HttpParams();
-    params = params.append("page", page);
-    return this.http.get<TransactionListResponse>(`${this.baseUrl}/transactions`, {params})
+    params = params.append('page', page);
+    return this.http.get<TransactionListResponse>(
+      `${this.baseUrl}/transactions`,
+      { params }
+    );
   }
 
-  getByAccId(accId: number, page: number): Observable<TransactionListResponse> {
+  getByAccNumber(fromAccNumber: string, page: number): Observable<TransactionListResponse> {
     let params = new HttpParams();
-    params = params.append('accId', accId);
+    params = params.append('accNumber', fromAccNumber);
     params = params.append('page', page);
 
     return this.http.get<TransactionListResponse>(
-      `${this.baseUrl}/transactions/get`, {params}
+      `${this.baseUrl}/transactions/get`,
+      { params }
     );
   }
-  
-  deposit(accId: number, amount: number): Observable<OkResponse> {
-    let params = new HttpParams();
-    params = params.append('accId', accId);
-    params = params.append('amount', amount);
-    console.log(params);
-    console.log(params.get('amount'));
 
-    return this.http.post<OkResponse>(
-      `${this.baseUrl}/accounts/deposit`,
-      params
-    );
+  deposit(accNumber: string, amount: number): Observable<OkResponse> {
+    return this.http.post<OkResponse>(`${this.baseUrl}/accounts/deposit`, {
+      accNumber,
+      amount,
+    });
   }
 
   transfer(
-    fromId: number,
-    toId: number,
+    fromAccNumber: string,
+    toAccNumber: string,
     amount: number
   ): Observable<OkResponse> {
-    let params = new HttpParams();
-    params = params.append('fromId', fromId);
-    params = params.append('toId', toId);
-    params = params.append('amount', amount);
-
-    return this.http.post<OkResponse>(
-      `${this.baseUrl}/accounts/transfer`,
-      params
-    );
+    return this.http.post<OkResponse>(`${this.baseUrl}/accounts/transfer`, {
+      fromAccNumber,
+      toAccNumber,
+      amount,
+    });
   }
 }

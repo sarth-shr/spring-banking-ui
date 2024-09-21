@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MatProgressBar } from '@angular/material/progress-bar';
 import { Router, RouterLink } from '@angular/router';
 import { AccountListResponse } from '../api/response/account-list-response';
 import { CustomerListResponse } from '../api/response/customer-list-response';
@@ -9,7 +10,6 @@ import { AccountService } from '../service/account.service';
 import { AuthenticationService } from '../service/authentication.service';
 import { CustomerService } from '../service/customer.service';
 import { TransactionService } from '../service/transaction.service';
-import { MatProgressBar } from '@angular/material/progress-bar';
 
 @Component({
   selector: 'app-customer-profile',
@@ -50,9 +50,6 @@ export class UserDashboardComponent implements OnInit {
     this.customerService.get(this.authService.extractSubject()).subscribe({
       next: (res: CustomerResponse) => {
         this.customer = res;
-      },
-      error: (err: ErrorResponse) => {
-        console.log(err.error);
       },
     });
   }

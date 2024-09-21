@@ -48,9 +48,6 @@ export class CustomerUpdateEmailComponent implements OnInit {
       next: (res: CustomerResponse) => {
         this.customer = res;
       },
-      error: (err: ErrorResponse) => {
-        console.log(err.error);
-      },
     });
   }
 
@@ -61,10 +58,6 @@ export class CustomerUpdateEmailComponent implements OnInit {
         next: (res: OkResponse) => {
           alert(res.message + '\nYou will now be logged out');
           this.authService.logout();
-        },
-        error: (err: ErrorResponse) => {
-          alert(err.error + '\nTry Again!');
-          window.location.reload();
         },
       });
   }

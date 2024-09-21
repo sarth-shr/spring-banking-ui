@@ -61,7 +61,7 @@ export class AuthenticationService {
   }
 
   isAdmin() {
-    return this.getPayload()?.admin ? true : false;
+    return this.getPayload()?.admin;
   }
 
   forbiddenAccess() {

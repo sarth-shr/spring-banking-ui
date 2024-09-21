@@ -6,5 +6,5 @@ export interface CustomerResponse {
   code: number;
   status: HttpStatusCode;
   message: string;
-  data: Customer;
+  response: Customer;
 }

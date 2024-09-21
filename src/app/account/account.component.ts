@@ -3,7 +3,6 @@ import { Component, OnInit } from '@angular/core';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { AccountListResponse } from '../api/response/account-list-response';
-import { ErrorResponse } from '../api/response/error-response';
 import { AccountService } from '../service/account.service';
 import { AuthenticationService } from '../service/authentication.service';
 
@@ -19,8 +18,6 @@ export class AccountComponent implements OnInit {
   totalItems!: number;
   pageSize!: number;
   currentPage = 0;
-
-  accId!: number;
 
   constructor(
     private router: Router,
@@ -39,17 +36,15 @@ export class AccountComponent implements OnInit {
       .subscribe({
         next: (res: AccountListResponse) => {
           this.accounts = res;
-          this.totalItems = res.data.totalItems;
-          this.pageSize = res.data.pageSize;
-        },
-        error: (err: ErrorResponse) => {
-          console.log(err);
+          this.totalItems = res.response.totalItems;
+          this.pageSize = res.response.pageSize;
         },
       });
   }
 
-  goToDetails(id: number) {
-    this.router.navigate(['./', id], {
+  goToDetails(accNumber: string) {
+    localStorage.setItem('accNumber', accNumber);
+    this.router.navigate(['details'], {
       relativeTo: this.route,
     });
   }

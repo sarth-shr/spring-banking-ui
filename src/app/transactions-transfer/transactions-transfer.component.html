@@ -10,14 +10,14 @@
     
       <form [formGroup]="form" (ngSubmit)="onSubmit()">
         <div class="form-group">
-          <label for="toId" class="form-label">Receiver Account ID</label>
-          @if (toId?.hasError('required') && toId?.dirty) {
+          <label for="toAccNumber" class="form-label">Receiver Account ID</label>
+          @if (toAccNumber?.hasError('required') && toAccNumber?.dirty) {
             <small class="text-danger">Required Field</small>
           }
-          @if (toId?.hasError('pattern') && toId?.dirty) {
+          @if (toAccNumber?.hasError('pattern') && toAccNumber?.dirty) {
             <small class="text-danger">Please enter a valid A/C #</small>
           }
-          <input type="text" class="form-control" formControlName="toId" [class.is-invalid]="toId?.invalid && toId?.dirty"/>
+          <input type="text" class="form-control" formControlName="toAccNumber" [class.is-invalid]="toAccNumber?.invalid && toAccNumber?.dirty"/>
         </div>
 
         <div class="form-group">
